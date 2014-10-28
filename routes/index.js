@@ -6,6 +6,8 @@ var http = require('http');
 var fs = require('fs');
 var request = require('request');
 
+var token; //For now, store token in a variable for later use
+
 /* GET home page. */
 router.get('/', function(req, res) {
   var locals = {
@@ -16,7 +18,7 @@ router.get('/', function(req, res) {
   res.render('index.jade', locals);
 });
 
-var token;
+/* GET call back route*/
 router.get('/oauth2callback', function(req, res) {
   var code = req.query.code;
   console.log(code);
@@ -48,6 +50,7 @@ router.get('/oauth2callback', function(req, res) {
   res.render('index.jade', locals);
 });
 
+/* */
 router.get('/code', function(req, res) {
   var locals = {
         title: 'This is my CODE app',
@@ -57,29 +60,13 @@ router.get('/code', function(req, res) {
   res.render('index.jade', locals);
 });
 
+
+/* example in calling app */
 function requestCallback(err, res, body) {
     console.log(body);
 }
 
 router.get('/test', function(req, res) {
-/*  var optionsUser = {
-    host: 'www.inaturalist.org',
-    path: '/users/edit.json'
-  };
-  callbackUser = function(response) {
-    var str = '';
-
-    //another chunk of data has been recieved, so append it to `str`
-    response.on('data', function (chunk) {
-      str += chunk;
-    });
-
-    //the whole response has been recieved, so we just print it out here
-    response.on('end', function () {
-      fs.writeFile("user.json", str);
-    });
-  }
-  http.get(optionsUser, callbackUser).end();*/
   var r = request.post({
     url: 'https://inaturalist.org/users/edit.json',
     headers: { 'Authorization': 'Bearer ' + token }
