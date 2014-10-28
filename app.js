@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var oauth2 = require('oauth').OAuth2;
+var http = require('http');
+var path = require('path')
+var gapi = require('./lib/gapi');
 
 var app = express();
 
