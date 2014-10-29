@@ -1,17 +1,17 @@
 extends layout
 
 block extraHeader
-  link(rel='icon', href='images/icon.png')
+  link(rel='icon', href='../images/icon.png')
 
 block navbar
   div.navbar-collapse.collapse
     ul.nav.navbar-nav.navbar-right
       li
-        a(href=url) Log in to iNaturalist
+        a(href=url) Already Logged in
       li
-        a(href=signup) Sign Up
+        a(href=logout) Logout
 
-block content 
+block content
   div.container
     div.jumbotron
       h1 Navbar example

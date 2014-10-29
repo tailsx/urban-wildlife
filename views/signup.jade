@@ -1,0 +1,38 @@
+extends layout
+
+block extraHeader
+  link(rel='icon', href='images/icon.png')
+
+block navbar
+  div.navbar-collapse.collapse
+    ul.nav.navbar-nav.navbar-right
+      li
+        a(href=url) Log in to iNaturalist
+      li
+        a(href=signup) Sign Up
+
+block content
+  div.container
+    div.row
+      div.text-center
+        form(role='form', method='post')
+          div.form-group
+            label(for='email') Email address
+            input.form-control#email(type='email', placeholder='Enter email', name='email')
+          div.form-group
+            label(for='username') Username
+            input.form-control#username(type='text', placeholder='Enter desired username', name='username')
+          div.form-group
+            label(for='password') Password
+            input.form-control#password(type='password', placeholder='Enter a Password', name='password')
+          div.form-group
+            label(for='confirmpw') Confirmation
+            input.form-control#confirmpw(type='password', placeholder='Retype your password', name='confirmpw')
+          div.form-group
+            label(for='description') Description(optional)
+            input.form-control#description(type='text', placeholder='Little blurb about yourself', name='description')
+          button.btn.btn-default(type='submit') Submit
+
+block scripts
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
