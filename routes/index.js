@@ -69,17 +69,30 @@ router.get('/signup', function(req, res){
 
 router.post('/signup', function(req, res){
   console.log(req.body);
+  console.log(res);
   var test ='https://inaturalist.org/users.json?user[email]=' + req.body.email
                                           + '&user[login]=' + req.body.username
                                           + '&user[password]=' + req.body.password
-                                          + '&user[password_confirmation]=' + req.body.confirmpw
-  console.log(test);
+                                          + '&user[password_confirmation]=' + req.body.confirmpw;
+  
   var r = request.post({
     url: test
-  }, function(err, res, body){
+  }, function(err, response, body){
       console.log(body);
-  })
-  res.redirect('users/main');
+      console.log(body.errors);
+      r = JSON.parse(body);
+      console.log(r.errors);
+      console.log(r.errors != undefined);
+      console.log(response.headers);
+      console.log(res.headers);
+      if (response.errors != undefined){
+        res.set({'Location': '/signup'});
+      }
+      else{
+        res.redirect('users/main');
+      }
+  });
+
 });
 
 router.get('/logout', function(req, res){
@@ -87,7 +100,8 @@ router.get('/logout', function(req, res){
     url: 'https://inaturalist.org/logout',
     headers: { 'Authorization': 'Bearer ' + token }
     }, function(err, res, body){
-      console.log();
+      console.log(res.status);
+      console.log(err);
     });
   var locals = {
         title: 'This is my TEST app',

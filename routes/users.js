@@ -18,3 +18,18 @@ router.get('/main', function(req, res) {
 });
 
 module.exports = router;
+
+/*
+Notes:
+- now want to record data
+- assume in filesystem there are photos to upload
+	- be able to select file and upload
+- review previous items
+
+-nearby observations(neat feature)
+-find other similars for design inspirations
+
+-user story, everyday users
+
+
+*/

@@ -7,18 +7,34 @@ block navbar
   div.navbar-collapse.collapse
     ul.nav.navbar-nav.navbar-right
       li
-        a(href=url) Already Logged in
+        a(href=url) Profile
+      li.dropdown
+        a.dropdown-toggle(href='#', data-toggle='dropdown') Reference
+          span.caret
+        ul.dropdown-menu(role='menu')
+          li
+            a(href='#') Guides
+          li
+            a(href='#') Maps
+          li
+            a(href='#') Checklist
+          li.divider
+          li.dropdown-header Nav header
+          li
+            a(href='#') Seperated link
+          li
+            a(href='#') One more separated link
       li
-        a(href=logout) Logout
+        a(href='#') Records
+      li
+        a(href='../') Logout
+
 
 block content
   div.container
     div.jumbotron
-      h1 Navbar example
-      p This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.
-      p To see the difference between static and fixed top navbars, just scroll.
-      p
-        a.btn.btn-lg.btn-primary(href='../../compenents/#navbar', role='button') View navbar docs &raquo;
+      h1 Profile
+      info
 
 block scripts
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
