@@ -35,18 +35,11 @@ router.get('/oauth2callback', function(req, res) {
                 }
                 else {
                     console.log('Obtained access_token: ', access_token);
-                    token=access_token;
-                    res.end( access_token);
+                    GLOBAL.token=access_token;
+                    res.redirect('/users/main');
                 }
               
     });
-  console.log(token);
-  var locals = {
-        title: 'This is my sample app',
-        url: gapi.url,
-        test: 'http://localhost:3000/test'
-      };
-  res.redirect('/users/main');
 });
 
 router.get('/code', function(req, res) {
@@ -57,6 +50,16 @@ router.get('/code', function(req, res) {
       };
   res.render('index.jade', locals);
 });
+
+router.get('/fail', function(req, res) {
+  var locals = {
+        title: 'This is my FAIL app',
+        url: gapi.url,
+        test: 'http://localhost:3000/test'
+      };
+  res.render('index.jade', locals);
+});
+
 
 router.get('/signup', function(req, res){
     var locals = {

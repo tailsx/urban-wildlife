@@ -32,10 +32,17 @@ block navbar
 
 block content
   div.container
-    div.jumbotron
-      h1 Profile
-      a(href='/users/newrecord') Add record
-      p #{info}
+    div.row
+      div.text-center
+        img.img-thumbnail(src='../images/placeholder.png')
+        form(role='form', method='post')
+          div.form-group
+            label(for='cname') Common Name
+            input.form-control#email(type='text', placeholder='Enter email', name='cname')
+          div.form-group
+            label(for='sname') Scientific Name
+            input.form-control#username(type='text', placeholder='Enter desired username', name='sname')
+          button.btn.btn-default(type='submit') Submit
 
 block scripts
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
