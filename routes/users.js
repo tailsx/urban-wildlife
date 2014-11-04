@@ -79,8 +79,18 @@ router.get('/newrecord', function(req,res){
 });
 
 router.post('/newrecord', function(req,res){
-	console.log('yay');
-	res.redirect('main');
+	client = new Client();
+	console.log(req.body.cname);
+
+    var args = {
+        parameters:{'observation[species_guess]': req.body.cname},
+        headers:{"Content-Type": "application/json",
+    			"Authorization": 'Bearer ' + global.token}
+    }
+
+    client.post('https://inaturalist.org/observations.json',args, function(data,response){
+        res.send(data);
+    });
 });
 
 router.get('/gettest', function(req,res){
@@ -98,36 +108,37 @@ router.get('/gettest', function(req,res){
 });
 
 router.get('/playground', function(req,res){
-	var client = new Client();
+	client = new Client();
+/*	console.log(req.body.cname);
 
-	// set content-type header and data as json in args parameter
-	args_js ={
-        parameters:{arg1:"hello",arg2:"world"},
-        data:{"arg1":"hello","arg2":123},
-        headers:{"Content-Type": "application/json"} 
-      };
+    var args = {
+        parameters:{'observation[species_guess]': req.body.cname},
+        headers:{"Content-Type": "application/json",
+    			"Authorization": 'Bearer ' + global.token}
+    }
 
-	// registering remote methods
-	client.registerMethod("xmlMethod", "localhost:3000/users/hello", "POST");
-
-	client.methods.xmlMethod(args_js,function(data,response){
-    // parsed response body as js object
-    //console.log(data);
-    // raw response
-    //console.log(response);
-
-
-	res.render('test.jade',{ profile: '/users/profile',
-	  						 info: 'Username: ',
-	  						 logout: '/logout',
-	  						 image: 'http://static.inaturalist.org/photos/1322146/large.JPG?1415082140'});
-	});
+    client.post('https://inaturalist.org/observations.json',args, function(data,response){
+        res.send(data);
+    });*/
+    res.render('test.jade',{ profile: '/users/profile',
+	  							   info: 'Username: ' + 'fe',
+	  							   logout: '/logout'});
 });
 
-router.post('/hello', function(req,res){
-		res.render('test.jade',{ profile: '/users/profile',
-	  						 info: 'Username: ',
-	  						 logout: '/logout'});
+router.post('/playground', function(req,res){
+	res.send(req.body);
+/*	client = new Client();
+	console.log(req.body.cname);
+
+    var args = {
+        parameters:{'observation[species_guess]': req.body.cname},
+        headers:{"Content-Type": "application/json",
+    			"Authorization": 'Bearer ' + global.token}
+    }
+
+    client.post('https://inaturalist.org/observations.json',args, function(data,response){
+        res.send(data);
+    });*/
 });
 
 module.exports = router;
