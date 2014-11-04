@@ -37,6 +37,7 @@ router.get('/oauth2callback', function(req, res) {
                 else {
                     console.log('Obtained access_token: ', access_token);
                     GLOBAL.token=access_token;
+                    //res.cookie('user', parsed.login, { maxAge: 900000, httpOnly: true });
                     res.redirect('/users/main');
                 }
               
@@ -72,31 +73,6 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', function(req, res){
-  /*
-  console.log(req.body);
-  console.log(res);
-  var test ='https://inaturalist.org/users.json?user[email]=' + req.body.email
-                                          + '&user[login]=' + req.body.username
-                                          + '&user[password]=' + req.body.password
-                                          + '&user[password_confirmation]=' + req.body.confirmpw;
-  
-  var r = request.post({
-    url: test
-  }, function(err, response, body){
-      console.log(body);
-      console.log(body.errors);
-      r = JSON.parse(body);
-      console.log(r.errors);
-      console.log(r.errors != undefined);
-      console.log(response.headers);
-      console.log(res.headers);
-      if (response.errors != undefined){
-        res.set({'Location': '/signup'});
-      }
-      else{
-        res.redirect('users/main');
-      }
-  });*/
   client = new Client();
     var args = {
         parameters:{'user[email]': req.body.email,
@@ -107,15 +83,14 @@ router.post('/signup', function(req, res){
     }
 
     client.post('https://inaturalist.org/users.json',args, function(data,response){
-        // parsed response body as js object
-        //console.log(data);
-        // raw response
-        //console.log(response);
         var parsed = JSON.parse(data);
         console.log(data[0]);
         console.log(parsed);
         console.log(parsed.errors);
-        if (parsed.errors=undefined){
+        if (parsed.errors==undefined){
+          console.log(parsed);
+          console.log(parsed.login);
+          //res.cookie('user', parsed.login, { maxAge: 900000, httpOnly: true });
           res.redirect('users/main');
         }
         else{
