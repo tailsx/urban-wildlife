@@ -1,0 +1,47 @@
+extends layout
+
+block extraHeader
+  link(rel='icon', href='images/icon.png')
+
+block navbar
+  div.navbar-collapse.collapse
+    ul.nav.navbar-nav.navbar-right
+      li
+        a(href=profile) Profile
+      li.dropdown
+        a.dropdown-toggle(href='#', data-toggle='dropdown') Reference
+          span.caret
+        ul.dropdown-menu(role='menu')
+          li
+            a(href='#') Guides
+          li
+            a(href='#') Maps
+          li
+            a(href='#') Checklist
+          li.divider
+          li.dropdown-header Nav header
+          li
+            a(href='#') Seperated link
+          li
+            a(href='#') One more separated link
+      li
+        a(href='#') Records
+      li
+        a(href='../') Logout
+
+block content
+  div.container
+    div.jumbotron
+      h1 Profile
+      a(href='/users/newrecord') Add record
+      for result in results
+        div.row
+          p #{result.id}
+          for photo in result.photos
+              p #{photo.medium_url}
+              img(src=photo.medium_url)
+
+
+block scripts
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')

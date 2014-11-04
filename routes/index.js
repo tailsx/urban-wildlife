@@ -5,6 +5,7 @@ var gapi = require('../lib/gapi');
 var http = require('http');
 var fs = require('fs');
 var request = require('request');
+var Client = require('node-rest-client').Client;
 
 var token; //For now, store token in a variable for later use
 
@@ -71,6 +72,7 @@ router.get('/signup', function(req, res){
 });
 
 router.post('/signup', function(req, res){
+  /*
   console.log(req.body);
   console.log(res);
   var test ='https://inaturalist.org/users.json?user[email]=' + req.body.email
@@ -94,8 +96,90 @@ router.post('/signup', function(req, res){
       else{
         res.redirect('users/main');
       }
-  });
+  });*/
+  client = new Client();
+    var args = {
+        parameters:{'user[email]': req.body.email,
+                    'user[login]': req.body.username,
+                    'user[password]': req.body.password,
+                    'user[password_confirmation]': req.body.confirmpw},
+        headers:{"Content-Type": "application/json"}
+    }
 
+    client.post('https://inaturalist.org/users.json',args, function(data,response){
+        // parsed response body as js object
+        //console.log(data);
+        // raw response
+        //console.log(response);
+        var parsed = JSON.parse(data);
+        console.log(data[0]);
+        console.log(parsed);
+        console.log(parsed.errors);
+        if (parsed.errors=undefined){
+          res.redirect('users/main');
+        }
+        else{
+          console.log("errors oops");
+          console.log(parsed);
+          var locals = {
+                title: 'This is my CODE app',
+                url: gapi.url,
+                signup: '/signup'
+              };
+          res.render('signup.jade', locals);
+        }
+    });
+
+});
+
+router.post('/testsignup', function(req, res){
+  console.log(req.body);
+  console.log(res);
+
+/*  client = new Client();
+
+  var args ={
+
+        par:{email: req.body.email,
+                    login: req.body.username,
+                    password: req.body.password,
+                    password_confirmation: req.body.confirmpw},
+        headers:{"test-header":"client-api"} // query parameter substitution vars
+      };
+
+    // registering remote methods
+    client.registerMethod("xmlMethod", "https://inaturalist.org/users", "POST");
+
+
+    client.methods.xmlMethod(user,function(data,response){
+        // parsed response body as js object
+        console.log(data);
+        // raw response
+        //console.log(response);
+        res.send(data);
+    });*/
+
+  client = new Client();
+/*    //var user = {'user[email]': req.body.email,
+                    'user[login]': req.body.username,
+                    'user[password]': req.body.password,
+                    'user[password_confirmation]': req.body.confirmpw};*/
+    
+    var args = {
+        parameters:{'user[email]': req.body.email,
+                    'user[login]': req.body.username,
+                    'user[password]': req.body.password,
+                    'user[password_confirmation]': req.body.confirmpw},
+        headers:{"Content-Type": "application/json"}
+    }
+
+    client.post('https://inaturalist.org/users.json',args, function(data,response){
+        // parsed response body as js object
+        console.log(data);
+        // raw response
+        //console.log(response);
+        res.send(data);
+    });
 });
 
 router.get('/logout', function(req, res){
