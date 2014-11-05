@@ -25,7 +25,7 @@ router.get('/oauth2callback', function(req, res) {
   gapi.client.getOAuthAccessToken (
     code,
     {'grant_type' : 'authorization_code',
-     'redirect_uri' : 'http://localhost:3000/oauth2callback'},
+     'redirect_uri' : 'https://urban-wildlife.herokuapp.com/oauth2callback'},
     function (e, access_token, refresh_token, results){
                 if (e) {
                     console.log(e);
@@ -42,24 +42,6 @@ router.get('/oauth2callback', function(req, res) {
                 }
               
     });
-});
-
-router.get('/code', function(req, res) {
-  var locals = {
-        title: 'This is my CODE app',
-        url: gapi.url,
-        test: 'http://localhost:3000/test'
-      };
-  res.render('index.jade', locals);
-});
-
-router.get('/fail', function(req, res) {
-  var locals = {
-        title: 'This is my FAIL app',
-        url: gapi.url,
-        test: 'http://localhost:3000/test'
-      };
-  res.render('index.jade', locals);
 });
 
 
@@ -167,8 +149,7 @@ router.get('/logout', function(req, res){
     });
   var locals = {
         title: 'This is my TEST app',
-        url: gapi.url,
-        test: 'http://localhost:3000/test'
+        url: gapi.url
       };
   token=undefined;
   res.redirect('/');
