@@ -37,11 +37,14 @@ block content
         img.img-thumbnail(src='../images/placeholder.png')
         form(role='form', method='post')
           div.form-group
-            label(for='cname') Common Name
-            input.form-control#email(type='text', placeholder='Enter email', name='cname')
+            label(for='guess') Species Guess
+            input.form-control#guess(type='text', placeholder='What the best guess you got?', name='guess')
           div.form-group
-            label(for='sname') Scientific Name
-            input.form-control#username(type='text', placeholder='Enter desired username', name='sname')
+            label(for='seen') Observered on(YYYY-01-03)
+            input.form-control#seen(type='text', placeholder='YYYY-DD-MM', name='seen')
+          div.form-group
+            label(for='desc') Description
+            input.form-control#desc(type='text', placeholder='Describe stuff', name='desc')
           button.btn.btn-default(type='submit') Submit
 
 block scripts

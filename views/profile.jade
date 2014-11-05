@@ -1,7 +1,7 @@
 extends layout
 
 block extraHeader
-  link(rel='icon', href='../../images/icon.png')
+  link(rel='icon', href='../images/icon.png')
 
 block navbar
   div.navbar-collapse.collapse
@@ -25,23 +25,19 @@ block navbar
           li
             a(href='#') One more separated link
       li
-        a(href='#') Records
+        a(href=toRecords) Records
       li
         a(href='../') Logout
+
 
 block content
   div.container
     div.jumbotron
-      h1 List all records
-      for result in results
-        div.row
-          p Species Guess: #{result.species_guess}
-          p Description: #{result.description}
-          p Photos:
-          for photo in result.photos
-              p #{photo.medium_url}
-              img(src=photo.medium_url)
-
+      h1 #{info}'s Profile
+      p With iNaturalist since: #{creation}
+      p Observation count: 
+        a(href=toRecords) #{count}
+      p E-mail: #{email}
 
 block scripts
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

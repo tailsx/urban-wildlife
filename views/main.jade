@@ -25,7 +25,7 @@ block navbar
           li
             a(href='#') One more separated link
       li
-        a(href='#') Records
+        a(href=toRecords) Records
       li
         a(href='../') Logout
 
@@ -33,9 +33,12 @@ block navbar
 block content
   div.container
     div.jumbotron
-      h1 Profile
-      a(href='/users/newrecord') Add record
-      p #{info}
+      h1 Hello, #{info}
+      ul.list-group
+        li.list-group-item
+          a(href='/users/newrecord') Add record
+        li.list-group-item
+          a(href='/users/playground') To playground!
 
 block scripts
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
