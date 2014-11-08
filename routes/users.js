@@ -151,6 +151,9 @@ router.post('/playground', multipartMiddleware, function(req,res){
 	console.log(req.files);
 	//1055035
 
+	req.pipe(request.post('https://inaturalist.org/observation_photos?observation_photo[observation_id]=1055033', {form:req.body})).pipe(res);
+
+	res.send('ok');
 /*	client = new Client();
 	console.log(req.body.cname);
 
@@ -165,16 +168,16 @@ router.post('/playground', multipartMiddleware, function(req,res){
         console.log(data);
         res.send(data);
     });*/
-    var test = {
+/*    var test = {
     	url: 'https://inaturalist.org/observation_photos?observation_photo[observation_id]=1055033',
-    	formData:  req.files.file
+    	formData:  req.files
     }
     request.post(test, function optionalCallback(err, httpResponse, body) {
 	  if (err) {
 	    return console.error('upload failed:', err);
 	  }
 	  console.log('Upload successful!  Server responded with:', body);
-	});
+	});*/
 
 });
 

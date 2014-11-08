@@ -1,22 +1,37 @@
-extends layout
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Urban Wildlife web app using iNaturalist database')
+    meta(name='author', content='Zhi Hao (David) Chen')
+    title Urban Wildlife App
+    link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    link(rel='icon', href='images/icon.png')
 
-block extraHeader
-  link(rel='icon', href='images/icon.png')
 
-block navbar
-  div.navbar-collapse.collapse
-    ul.nav.navbar-nav.navbar-right
-      li
-        a(href=url) Log in to iNaturalist
-      li
-        a(href=signup) Sign Up
+body#test
+  div.navbar.navbar-default.navbar-static-top(role='navigation')
+    div.container
+      div.navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='#') Urban Wildlife
+      div.navbar-collapse.collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href=url) Log in to iNaturalist
+          li
+            a(href=signup) Sign Up
 
-block content 
-  div.container
-    div.jumbotron.text-center
-      h1 Urban Wildlife
-      
+  div.container.text-center
+    button.btn.btn-success#enter(type='button') Make a difference
 
-block scripts
+
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
+

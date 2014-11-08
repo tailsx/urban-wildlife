@@ -35,16 +35,9 @@ block content
     div.row
       div.text-center
         img.img-thumbnail(src='../images/placeholder.png')
-        form(role='form', method='post')
+        form(role='form', method='post', enctype='multipart/form-data')
           div.form-group
-            label(for='guess') Course Code
-            input.form-control#guess(type='text', placeholder='Ex. CSC301', name='course')
-          div.form-group
-            label(for='seen') Observered on(YYYY-01-03)
-            input.form-control#seen(type='text', placeholder='YYYY-DD-MM', name='seen')
-          div.form-group
-            label(for='desc') Description
-            input.form-control#desc(type='text', placeholder='Describe stuff', name='desc')
+            input.form-control#image(type='file', accept='png', name='file')
           button.btn.btn-default(type='submit') Submit
 
 block scripts
