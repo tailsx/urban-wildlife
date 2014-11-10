@@ -48,3 +48,21 @@ a {
   padding-top: 5px;
   padding-left: 10px;
 }
+
+.primary{
+  color: #CCEBD6;
+}
+
+.second{
+  color: #4DB870;
+}
+
+.readable{
+  font-size: 16px;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    background-color: #4DB870;
+    color: #FFC0CB;
+    font-size: 18px;
+}
