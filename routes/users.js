@@ -27,7 +27,9 @@ router.get('/main', function(req, res) {
 	// direct way
 	client.get(url, args, function(data, response){
 	    var parsed = JSON.parse(data);
-		res.render('main.jade',{ profile: '/users/profile',
+		res.render('main.jade',{ pic: parsed.medium_user_icon_url,
+								 link: parsed.uri,
+								 profile: '/users/profile',
 		  						 info: parsed.login,
 		  						 logout: '/logout',
 		  						 toRecords : '/users/records/'+ parsed.login});

@@ -1,6 +1,7 @@
 body{
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #DEFFDE;
+  background: url('../images/road.jpg');
+  background-repeat: repeat;
 }
 
 #test {
@@ -22,15 +23,15 @@ a {
 }
 
 .container > .jumbotron{
-  background-color: #66FF33;
+  background-color: green;
 }
 
-.container > .jumbotron > .row:nth-of-type(odd){
-  background-color: red;
+.record:nth-of-type(odd){
+  background-color: #CCEBD6;
 }
 
-.container > .jumbotron > .row:nth-of-type(even){
-  background-color: blue;
+.record:nth-of-type(even){
+  background-color: #4DB870;
 }
 
 .hidden{
@@ -39,4 +40,11 @@ a {
 
 #enter{
   margin-top: 45%;
+}
+
+#logo{
+  float: left;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
 }
