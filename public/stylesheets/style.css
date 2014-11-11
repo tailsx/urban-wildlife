@@ -78,6 +78,12 @@ ul.list-inline > li{
   background-color: white;
   height: 100px;
   width: 50%;
+  margin: 0px;
+}
+
+ul.list-inline > li:hover{
+  background-color: #ddd;
+  border: 1px solid black;
 }
 
 .mainIcon > span, .glyphicon .glyphicon-plus{
