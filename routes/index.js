@@ -173,4 +173,8 @@ router.get('/test', function(req, res) {
   res.render('index.jade', locals);
 });
 
+router.get('/temp', function(req, res) {
+  res.render('layout.jade');
+});
+
 module.exports = router;

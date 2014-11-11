@@ -73,3 +73,14 @@ a {
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
   background-color: #f5f5f5;
 }
+
+ul.list-inline > li{
+  background-color: white;
+  height: 100px;
+  width: 50%;
+}
+
+.mainIcon > span, .glyphicon .glyphicon-plus{
+  margin-top: 10px;
+  font-size: 26px;
+}
