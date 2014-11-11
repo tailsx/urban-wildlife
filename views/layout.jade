@@ -22,7 +22,7 @@ body
           span.icon-bar
         div
           img#logo(src='../images/icon.png')
-          a.navbar-brand(href=toMain) Urban Wildlife
+          a.navbar-brand(href='/users/main') Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
           li
@@ -48,15 +48,15 @@ body
               li
                 a(href='#') One more separated link
           li
-            a(href=toRecords)
+            a(href='#')
               span.glyphicon.glyphicon-list
               |  Records
           li
-            a(href=toProfile)
+            a(href='/users/profile')
               span.glyphicon.glyphicon-user
               |  Profile
           li
-            a(href='../')
+            a(href='/')
               span.glyphicon.glyphicon-log-out
               |  Logout
 

@@ -36,17 +36,11 @@ body
               span.caret
             ul.dropdown-menu(role='menu')
               li
-                a(href='#') Guides
+                a(href='../temp') Guides
               li
-                a(href='#') Maps
+                a(href='../temp') Maps
               li
-                a(href='#') Checklist
-              li.divider
-              li.dropdown-header Nav header
-              li
-                a(href='#') Seperated link
-              li
-                a(href='#') One more separated link
+                a(href='../temp') Checklist
           li
             a(href=toRecords)
               span.glyphicon.glyphicon-list
@@ -63,12 +57,14 @@ body
   div.container
     div.jumbotron
       div.row
-        div.col-xs-4
+        div.col-xs-12.col-sm-5.col-md-4
           img.img-rounded.center-block(src=pic)
-        div.col-xs-offset-2
+        div.col-md-offset-1
           h1 Hello, #{info}
           p iNaturalist profile page 
             a(href=link) link
+      div.row.voffset.text-center
+        p Dashboard
       div.row
         ul.list-inline.text-center
           li.list-group-item
@@ -78,19 +74,19 @@ body
               a(href='/users/newrecord') Add record
           li.list-group-item
             div.row.mainIcon
-              span.glyphicon.glyphicon-plus
+              span.glyphicon.glyphicon-picture
             div.row
-              a(href='/users/newrecord') Add record
+              | Maps
           li.list-group-item
             div.row.mainIcon
-              span.glyphicon.glyphicon-plus
+              span.glyphicon.glyphicon-info-sign
             div.row
-              a(href='/users/newrecord') Add record
+              | Reference
           li.list-group-item
             div.row.mainIcon
-              span.glyphicon.glyphicon-plus
+              span.glyphicon.glyphicon-list-alt
             div.row
-              a(href='/users/newrecord') Add record
+              | Checklist
       div.row.footer
         
   
