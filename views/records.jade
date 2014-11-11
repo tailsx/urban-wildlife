@@ -25,6 +25,10 @@ body
           a.navbar-brand(href='#') Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
+          li
+            a(href=toNew)
+              span.glyphicon.glyphicon-plus
+              |  Add Entry
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown') 
               span.glyphicon.glyphicon-book
@@ -48,7 +52,7 @@ body
               span.glyphicon.glyphicon-list
               |  Records
           li
-            a(href=profile)
+            a(href=toProfile)
               span.glyphicon.glyphicon-user
               |  Profile
           li
@@ -59,7 +63,7 @@ body
   div.container
     div.jumbotron
       div.row
-        a.btn.btn-primary(href='/users/main') Back to Profile
+        a.btn.btn-success(href='/users/main') Back to Profile
       h1 List all records
       for result in results
         div.row.record

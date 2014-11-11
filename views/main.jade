@@ -25,6 +25,10 @@ body
           a.navbar-brand(href='#') Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
+          li
+            a(href=toNew)
+              span.glyphicon.glyphicon-plus
+              |  Add Entry
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown') 
               span.glyphicon.glyphicon-book
@@ -48,7 +52,7 @@ body
               span.glyphicon.glyphicon-list
               |  Records
           li
-            a(href=profile)
+            a(href='#')
               span.glyphicon.glyphicon-user
               |  Profile
           li
@@ -63,7 +67,7 @@ body
           img.img-rounded.center-block(src=pic)
         div.col-xs-offset-2
           h1 Hello, #{info}
-          p Inaturalist profile page 
+          p iNaturalist profile page 
             a(href=link) link
       div.row
         ul.list-group

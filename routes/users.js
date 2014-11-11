@@ -29,10 +29,11 @@ router.get('/main', function(req, res) {
 	    var parsed = JSON.parse(data);
 		res.render('main.jade',{ pic: parsed.medium_user_icon_url,
 								 link: parsed.uri,
-								 profile: '/users/profile',
+								 toProfile: '/users/main',
 		  						 info: parsed.login,
 		  						 logout: '/logout',
-		  						 toRecords : '/users/records/'+ parsed.login});
+		  						 toRecords : '/users/records/'+ parsed.login,
+		  						 toNew : '/users/newrecord'});
 	});
 });
 
@@ -78,10 +79,11 @@ router.get('/records/:username', function(req,res){
 	// direct way
 	client.get(url, function(data, response){
 		var parsed = JSON.parse(data);
-		res.render('records.jade',{ profile: '/users/profile',
+		res.render('records.jade',{ toProfile: '/users/main',
 			  						info: req.params.username,
 			  						logout: '/logout',
-			  						results: parsed});
+			  						results: parsed,
+			  					    toNew : '/users/newrecord'});
 	});
 });
 
@@ -92,11 +94,11 @@ router.get('/newrecord', function(req,res){
 	    headers: { 'Authorization': 'Bearer ' + global.token }
 	  }, function(err, response, body){
 	      console.log(body);
-	      var parsedBody = JSON.parse(body);
-	      console.log(parsedBody.login);
-	      res.render('newrecord.jade',{ profile: '/users/profile',
-	  							   info: 'Username: ' + parsedBody.login,
-	  							   logout: '/logout'});
+	      var parsed = JSON.parse(body);
+	      res.render('newrecord.jade',{ toProfile: '/users/main',
+										toNew : '/users/newrecord',
+										toRecords : '/users/records/'+parsed.login,
+	  							   		logout: '/logout'});
 	  });
 });
 
