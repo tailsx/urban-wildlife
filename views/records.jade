@@ -25,10 +25,10 @@ body
           a.navbar-brand(href='#') Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
-          li
-            a(href=profile) Profile
           li.dropdown
-            a.dropdown-toggle(href='#', data-toggle='dropdown') Reference
+            a.dropdown-toggle(href='#', data-toggle='dropdown') 
+              span.glyphicon.glyphicon-book
+              |  Reference
               span.caret
             ul.dropdown-menu(role='menu')
               li
@@ -44,9 +44,17 @@ body
               li
                 a(href='#') One more separated link
           li
-            a(href='#') Records
+            a(href='#')
+              span.glyphicon.glyphicon-list
+              |  Records
           li
-            a(href='../') Logout
+            a(href=profile)
+              span.glyphicon.glyphicon-user
+              |  Profile
+          li
+            a(href='../')
+              span.glyphicon.glyphicon-log-out
+              |  Logout
 
   div.container
     div.jumbotron
