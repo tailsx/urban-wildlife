@@ -35,23 +35,28 @@ body
       h1 Register an iNaturalist account
       div.row
         div.text-center
-          form(role='form', method='post')
+          form.form-horizontal(role='form', method='post')
             div.form-group
-              label.readable.primary(for='email') Email address
-              input.form-control#email(type='email', placeholder='Enter email', name='email')
+              label.readable.col-sm-2.col-sm-offset-1.control-label(for='email') Email address
+              div.col-sm-8
+                input.form-control#email(type='email', placeholder='Enter email', name='email')
             div.form-group
-              label.readable.primary(for='username') Username
-              input.form-control#username(type='text', placeholder='Enter desired username', name='username')
+              label.readable.col-sm-2.col-sm-offset-1.control-label(for='username') Username
+              div.col-sm-8
+                input.form-control#username(type='text', placeholder='Enter desired username', name='username')
             div.form-group
-              label.readable.primary(for='password') Password
-              input.form-control#password(type='password', placeholder='Enter a Password', name='password')
+              label.readable.col-sm-2.col-sm-offset-1.control-label(for='password') Password
+              div.col-sm-8
+                input.form-control#password(type='password', placeholder='Enter a Password', name='password')
             div.form-group
-              label.readable.primary(for='confirmpw') Confirmation
-              input.form-control#confirmpw(type='password', placeholder='Retype your password', name='confirmpw')
+              label.readable.col-sm-2.col-sm-offset-1.control-label(for='confirmpw') Confirmation
+              div.col-sm-8
+                input.form-control#confirmpw(type='password', placeholder='Retype your password', name='confirmpw')
             div.form-group
-              label.readable.primary(for='description') Description(optional)
-              input.form-control#description(type='text', placeholder='Little blurb about yourself', name='description')
-            button.btn.btn-primary(type='submit') Join iNaturalist
+              label.readable.col-sm-2.col-sm-offset-1.control-label(for='description') Description(optional)
+              div.col-sm-8
+                input.form-control#description(type='text', placeholder='Little blurb about yourself', name='description')
+            button.btn.btn-default(type='submit') Join iNaturalist
   
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')

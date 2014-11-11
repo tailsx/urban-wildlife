@@ -42,7 +42,16 @@ a {
 }
 
 #enter{
-  margin-top: 45%;
+  margin-top: 40%;
+  height: 60px;
+  font-size: 20px;
+  line-height: 40px;
+  vertical-align: baseline;
+  transition: all 1s ease 0s;
+}
+
+#enter:hover {
+  background: #449d44;
 }
 
 #logo{
