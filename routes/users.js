@@ -29,7 +29,8 @@ router.get('/main', function(req, res) {
 	    var parsed = JSON.parse(data);
 		res.render('main.jade',{ pic: parsed.medium_user_icon_url,
 								 link: parsed.uri,
-								 toProfile: '/users/main',
+								 toProfile: '/users/profile',
+								 toMain: '/users/main',
 		  						 info: parsed.login,
 		  						 logout: '/logout',
 		  						 toRecords : '/users/records/'+ parsed.login,
@@ -59,13 +60,13 @@ router.get('/profile', function(req,res){
 
 	            // raw response
 	            //console.log(response);
-	res.render('profile.jade',{ profile: '/users/profile',
+	res.render('profile.jade',{ toMain: '/users/main',
 		  						info: parsed.login,
-		  						logout: '/logout',
 		  						creation: parsed.created_at,
 		  						count: parsed.observations_count,
 		  						email: parsed.email,
-		  						toRecords : '/users/records/'+parsed.login});
+		  						toRecords : '/users/records/'+parsed.login,
+		  						toNew : '/users/newrecord'});
 	});
 });
 
@@ -79,9 +80,9 @@ router.get('/records/:username', function(req,res){
 	// direct way
 	client.get(url, function(data, response){
 		var parsed = JSON.parse(data);
-		res.render('records.jade',{ toProfile: '/users/main',
+		res.render('records.jade',{ toMain: '/users/main',
+									toProfile: '/users/profile',
 			  						info: req.params.username,
-			  						logout: '/logout',
 			  						results: parsed,
 			  					    toNew : '/users/newrecord'});
 	});
@@ -95,10 +96,10 @@ router.get('/newrecord', function(req,res){
 	  }, function(err, response, body){
 	      console.log(body);
 	      var parsed = JSON.parse(body);
-	      res.render('newrecord.jade',{ toProfile: '/users/main',
+	      res.render('newrecord.jade',{ toMain: '/users/main',
+	      								toProfile: '/users/profile',
 										toNew : '/users/newrecord',
-										toRecords : '/users/records/'+parsed.login,
-	  							   		logout: '/logout'});
+										toRecords : '/users/records/'+parsed.login});
 	  });
 });
 

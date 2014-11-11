@@ -1,36 +1,65 @@
-extends layout
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='Urban Wildlife web app using iNaturalist database')
+    meta(name='author', content='Zhi Hao (David) Chen')
+    title Urban Wildlife App
+    link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    link(rel='icon', href='../images/icon.png')
 
-block extraHeader
-  link(rel='icon', href='../images/icon.png')
+body
+  div.navbar.navbar-default.navbar-static-top(role='navigation')
+    div.container
+      div.navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        div
+          img#logo(src='../images/icon.png')
+          a.navbar-brand(href=toMain) Urban Wildlife
+      div.navbar-collapse.collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href=toNew)
+              span.glyphicon.glyphicon-plus
+              |  Add Entry
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown') 
+              span.glyphicon.glyphicon-book
+              |  Reference
+              span.caret
+            ul.dropdown-menu(role='menu')
+              li
+                a(href='#') Guides
+              li
+                a(href='#') Maps
+              li
+                a(href='#') Checklist
+              li.divider
+              li.dropdown-header Nav header
+              li
+                a(href='#') Seperated link
+              li
+                a(href='#') One more separated link
+          li
+            a(href=toRecords)
+              span.glyphicon.glyphicon-list
+              |  Records
+          li
+            a(href='#')
+              span.glyphicon.glyphicon-user
+              |  Profile
+          li
+            a(href='../')
+              span.glyphicon.glyphicon-log-out
+              |  Logout
 
-block navbar
-  div.navbar-collapse.collapse
-    ul.nav.navbar-nav.navbar-right
-      li
-        a(href=profile) Profile
-      li.dropdown
-        a.dropdown-toggle(href='#', data-toggle='dropdown') Reference
-          span.caret
-        ul.dropdown-menu(role='menu')
-          li
-            a(href='#') Guides
-          li
-            a(href='#') Maps
-          li
-            a(href='#') Checklist
-          li.divider
-          li.dropdown-header Nav header
-          li
-            a(href='#') Seperated link
-          li
-            a(href='#') One more separated link
-      li
-        a(href=toRecords) Records
-      li
-        a(href='../') Logout
 
-
-block content
   div.container
     div.jumbotron
       h1 #{info}'s Profile
@@ -39,6 +68,5 @@ block content
         a(href=toRecords) #{count}
       p E-mail: #{email}
 
-block scripts
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
