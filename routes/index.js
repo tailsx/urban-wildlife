@@ -1,14 +1,15 @@
 var express = require('express');
 var router = express.Router();
 var oauth2 = require('oauth').OAuth2;
-var gapi = require('../lib/gapi_local');
+var gapi = require('../lib/gapi');
 var http = require('http');
 var fs = require('fs');
 var request = require('request');
 var Client = require('node-rest-client').Client;
 
 var token; //For now, store token in a variable for later use
-
+//var basesite = 'http://localhost:3000';
+var basesite = 'https://urban-wildlife.herokuapp.com';
 /* GET home page. */
 router.get('/', function(req, res) {
   var locals = {
@@ -25,7 +26,7 @@ router.get('/oauth2callback', function(req, res) {
   gapi.client.getOAuthAccessToken (
     code,
     {'grant_type' : 'authorization_code',
-     'redirect_uri' : 'http://localhost:3000/oauth2callback'},
+     'redirect_uri' : basesite + '/oauth2callback'},
     function (e, access_token, refresh_token, results){
                 if (e) {
                     console.log(e);
