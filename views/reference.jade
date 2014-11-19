@@ -22,7 +22,7 @@ body
           span.icon-bar
         div
           img#logo(src='../../images/icon.png')
-          a.navbar-brand(href=toMains) Urban Wildlife
+          a.navbar-brand(href=toMain) Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
           li
@@ -36,13 +36,13 @@ body
               span.caret
             ul.dropdown-menu(role='menu')
               li
-                a(href='#') Species list
+                a(href='#') Species Names
               li
                 a(href='../temp') Maps
               li
                 a(href='../temp') Checklist
           li
-            a(href='#')
+            a(href=toRecords)
               span.glyphicon.glyphicon-list
               |  Records
           li
@@ -65,8 +65,7 @@ body
               div.form-group
                 label(for='search') Search Species
                 input.form-control#search(type='text', placeholder='Please enter Scientific name, Common name or VASON taxon identifier.', name='search')
-              button.btn.btn-success(type='submit') Submit
-              a.btn.btn-default(href='/users/main') Cancel
+              button.btn.btn-success.pull-right(type='submit') Submit
 
       div.voffset
 

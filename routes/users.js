@@ -121,19 +121,41 @@ router.post('/newrecord', function(req,res){
 });
 
 router.get('/reference', function(req,res){
-	res.render('reference.jade');
+	var profile = 'https://inaturalist.org/users/edit.json';
+	var r = request.get({
+	    url: profile,
+	    headers: { 'Authorization': 'Bearer ' + global.token }
+	  }, function(err, response, body){
+	      console.log(body);
+	      var parsed = JSON.parse(body);
+	      res.render('displayreference.jade',{ toMain: '/users/main',
+	      									   toProfile: '/users/profile',
+										       toNew : '/users/newrecord',
+										       toRecords : '/users/records/'+parsed.login});
+	  });
 });
 
 router.post('/reference', function(req,res){
-	client = new Client();
+	var profile = 'https://inaturalist.org/users/edit.json';
+	var r = request.get({
+	    url: profile,
+	    headers: { 'Authorization': 'Bearer ' + global.token }
+	  }, function(err, response, body){
+	  		var parsed = JSON.parse(body);
+	      	client = new Client();
 
-    var args = {
-        parameters:{'q': req.body.search}
-    }
+		    var args = {
+		        parameters:{'q': req.body.search}
+		    }
 
-    client.get('http://data.canadensys.net/vascan/api/0.1/search.json',args, function(data,response){
-        res.render('reference.jade', {searchResults : data});
-    });
+		    client.get('http://data.canadensys.net/vascan/api/0.1/search.json',args, function(data,response){
+	      		res.render('reference.jade',{ toMain: '/users/main',
+	      									  toProfile: '/users/profile',
+										      toNew : '/users/newrecord',
+										      toRecords : '/users/records/'+parsed.login,
+										   	  searchResults : data});
+	  		});
+	  });
 });
 
 

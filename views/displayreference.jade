@@ -8,7 +8,7 @@ html(lang='en')
     title Urban Wildlife App
     link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
-    link(rel='icon', href='../images/icon.png')
+    link(rel='icon', href='../../images/icon.png')
 
 
 body
@@ -21,7 +21,7 @@ body
           span.icon-bar
           span.icon-bar
         div
-          img#logo(src='../images/icon.png')
+          img#logo(src='../../images/icon.png')
           a.navbar-brand(href=toMain) Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
@@ -36,7 +36,7 @@ body
               span.caret
             ul.dropdown-menu(role='menu')
               li
-                a(href='/users/reference') Species Names
+                a(href='#') Species Names
               li
                 a(href='../temp') Maps
               li
@@ -50,28 +50,22 @@ body
               span.glyphicon.glyphicon-user
               |  Profile
           li
-            a(href='../')
+            a(href='../../')
               span.glyphicon.glyphicon-log-out
               |  Logout
 
   div.container
-    div.row
-      div.text-center
-        img.img-thumbnail(src='../images/placeholder.png')
-        div.container
-          div.jumbotron
-            form(role='form', method='post')
+    div.jumbotron
+      h1 Species Name Search
+      h3 We use the Canadsys database to ensure to keep our naming as consistent possible.  Enter names here to see if your names matches.
+      
+      div.voffset
+      
+      form(role='form', method='post')
               div.form-group
-                label(for='guess') Species Guess
-                input.form-control#guess(type='text', placeholder='Guess the name of your entry', name='guess')
-              div.form-group
-                label(for='seen') Observered on(YYYY-MM-DD)
-                input.form-control#seen(type='text', placeholder='YYYY-MM-DD', name='seen')
-              div.form-group
-                label(for='desc') Description
-                input.form-control#desc(type='text', placeholder='Describe stuff', name='desc')
-              button.btn.btn-default(type='submit') Submit
-              a.btn.btn-danger(href='/users/main') Cancel
+                label(for='search') Search Species
+                input.form-control#search(type='text', placeholder='Please enter Scientific name, Common name or VASON taxon identifier.', name='search')
+              button.btn.btn-success.pull-right(type='submit') Submit
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
