@@ -6,6 +6,7 @@ var index = require('../routes/index');
 var Client = require('node-rest-client').Client;
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
+var fs = require('fs')
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -119,6 +120,24 @@ router.post('/newrecord', function(req,res){
     });
 });
 
+router.get('/reference', function(req,res){
+	res.render('reference.jade');
+});
+
+router.post('/reference', function(req,res){
+	client = new Client();
+
+    var args = {
+        parameters:{'q': 'squirrel'}
+    }
+
+    client.get('http://data.canadensys.net/vascan/api/0.1/search.json',args, function(data,response){
+        res.send(data);
+    });
+});
+
+
+
 router.get('/gettest', function(req,res){
 	var profile = 'https://inaturalist.org/observations/tailsx.json';
 	var r = request.get({
@@ -152,37 +171,54 @@ router.get('/playground', function(req,res){
 });
 
 router.post('/playground', multipartMiddleware, function(req,res){
-	console.log(req.body);
-	console.log(req.files);
-	//1055035
 
-	req.pipe(request.post('https://inaturalist.org/observation_photos?observation_photo[observation_id]=1055033', {form:req.body})).pipe(res);
-
-	res.send('ok');
-/*	client = new Client();
-	console.log(req.body.cname);
-
-    var args = {
-        parameters:{'observation_photo[observation_id]': '1055033'},
-        headers:{'Content-Type': 'multipart/form-data',
-        		'Authorization': 'Bearer ' + global.token}
+	var args = {
+        parameters:{'observation_photo[observation_id]': '1055033'}, //maybe read image file given by path.
+        data : {'file' : req.files.file.ws},
+        headers:{'Authorization': 'Bearer ' + global.token}
     }
 
     client.post('https://inaturalist.org/observation_photos',args, function(data,response){
-        console.log(response);
-        console.log(data);
-        res.send(data);
-    });*/
-/*    var test = {
-    	url: 'https://inaturalist.org/observation_photos?observation_photo[observation_id]=1055033',
-    	formData:  req.files
-    }
-    request.post(test, function optionalCallback(err, httpResponse, body) {
+        //console.log(response);
+        //console.log(data);
+        console.log("something");
+       	console.log(response.body);
+       	res.send("parsed");
+    });
+    //content = data;
+
+    // Invoke the next step here however you like
+    //res.send(content);   // Put all of the code here (not the best solution)
+
+/*	console.log(req.files);
+	console.log(req.files.file);
+	//1055035
+	var options = {
+		url: 'https://inaturalist.org/observation_photos',
+		formData: req.files.file
+	};
+
+	request.post(options, function optionalCallback(err, httpResponse, body) {
 	  if (err) {
 	    return console.error('upload failed:', err);
 	  }
+	  console.log(httpResponse);
 	  console.log('Upload successful!  Server responded with:', body);
+	  res.send(body);
 	});*/
+
+/*    var args = {
+        parameters:{'observation_photo[observation_id]': '1055033',
+    				'file' : req}, //maybe read image file given by path.
+        headers:{'Authorization': 'Bearer ' + global.token}
+    }
+
+    client.post('https://inaturalist.org/observation_photos',args, function(data,response){
+        //console.log(response);
+        //console.log(data);
+        console.log("something");
+        res.send(data);
+    });*/
 
 });
 

@@ -8,7 +8,7 @@ html(lang='en')
     title Urban Wildlife App
     link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
-    link(rel='icon', href='../images/icon.png')
+    link(rel='icon', href='../../images/icon.png')
 
 
 body
@@ -21,8 +21,8 @@ body
           span.icon-bar
           span.icon-bar
         div
-          img#logo(src='../images/icon.png')
-          a.navbar-brand(href=toMain) Urban Wildlife
+          img#logo(src='../../images/icon.png')
+          a.navbar-brand(href=toMains) Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
           li
@@ -36,13 +36,13 @@ body
               span.caret
             ul.dropdown-menu(role='menu')
               li
-                a(href='../temp') Species Name
+                a(href='#') Species list
               li
                 a(href='../temp') Maps
               li
                 a(href='../temp') Checklist
           li
-            a(href=toRecords)
+            a(href='#')
               span.glyphicon.glyphicon-list
               |  Records
           li
@@ -50,45 +50,21 @@ body
               span.glyphicon.glyphicon-user
               |  Profile
           li
-            a(href='../')
+            a(href='../../')
               span.glyphicon.glyphicon-log-out
               |  Logout
 
   div.container
     div.jumbotron
-      div.row
-        div.col-xs-12.col-sm-5.col-md-4
-          img.img-rounded.center-block(src=pic)
-        div.col-md-offset-1
-          h1 Hello, #{info}
-          p iNaturalist profile page 
-            a(href=link) link
-      div.row.voffset.text-center
-        a(href='/users/playground') Dashboard
-      div.row
-        ul.list-inline.text-center
-          li.list-group-item
-            div.row.mainIcon
-              span.glyphicon.glyphicon-plus
-            div.row
-              a(href='/users/newrecord') Add record
-          li.list-group-item
-            div.row.mainIcon
-              span.glyphicon.glyphicon-picture
-            div.row
-              | Maps
-          li.list-group-item
-            div.row.mainIcon
-              span.glyphicon.glyphicon-info-sign
-            div.row
-              a(href='/users/reference') Species Names
-          li.list-group-item
-            div.row.mainIcon
-              span.glyphicon.glyphicon-list-alt
-            div.row
-              | Checklist
-      div.row.footer
-        
-  
+      h1 Species Name Search
+      h3 We use the Canadsys database to ensure to keep our naming as consistent possible.  Enter names here to see if your names matches.
+      div.voffset
+      form(role='form', method='post')
+              div.form-group
+                label(for='search') Search Species
+                input.form-control#search(type='text', placeholder='Please enter Scientific name, Common name or VASON taxon identifier.', name='course')
+              button.btn.btn-success(type='submit') Submit
+              a.btn.btn-default(href='/users/main') Cancel
+
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
