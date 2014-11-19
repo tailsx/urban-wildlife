@@ -57,16 +57,16 @@ body
   div.container
     div.jumbotron
       div.row
-        img(src='https://maps.googleapis.com/maps/api/staticmap?center=Toronto,Ontario&zoom=12&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284')
         a.btn.btn-success(href='/users/main') Back to Profile
       h1 List all records
       for result in results
         div.row.record
+          img(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=15&size=600x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
           p Species Guess: #{result.species_guess}
           p Description: #{result.description}
           p Photos:
           for photo in result.photos
-              p #{photo.medium_url}
+              p #{photo.square_url}
               img(src=photo.medium_url)
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
