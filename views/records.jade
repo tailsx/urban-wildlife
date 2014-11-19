@@ -61,9 +61,15 @@ body
       h1 List all records
       for result in results
         div.row.record
-          img(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=15&size=600x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
+          if result.latitude == null && result.longitude == null
+            p No coordinates given.  Sorry
+          else
+            img(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=#{result.map_scale}&size=600x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
           p Species Guess: #{result.species_guess}
-          p Description: #{result.description}
+          if result.description == ""
+            p Description: No Description available
+          else
+            p Description: #{result.description}
           p Photos:
           for photo in result.photos
               p #{photo.square_url}
