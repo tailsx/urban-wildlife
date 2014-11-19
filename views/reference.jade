@@ -58,13 +58,33 @@ body
     div.jumbotron
       h1 Species Name Search
       h3 We use the Canadsys database to ensure to keep our naming as consistent possible.  Enter names here to see if your names matches.
+      
       div.voffset
+      
       form(role='form', method='post')
               div.form-group
                 label(for='search') Search Species
-                input.form-control#search(type='text', placeholder='Please enter Scientific name, Common name or VASON taxon identifier.', name='course')
+                input.form-control#search(type='text', placeholder='Please enter Scientific name, Common name or VASON taxon identifier.', name='search')
               button.btn.btn-success(type='submit') Submit
               a.btn.btn-default(href='/users/main') Cancel
+
+      div.voffset
+
+      div.row
+        if searchResults.results[0].numMatches == 0
+          h4 No Results were found for "#{searchResults.results[0].searchedTerm}"
+        else
+          h4 Search Results for "#{searchResults.results[0].searchedTerm}"
+          for r in searchResults.results[0].matches
+            div.record
+              p Scientific Name: #{r.scientificName}
+              p Common Name(s):
+              ul
+                for common in r.vernacularNames
+                  li
+                    p #{common.vernacularName}(#{common.language})
+              p Taxon ID: #{r.taxonID}
+              p Taxon Rank: #{r.taxonRank}
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')

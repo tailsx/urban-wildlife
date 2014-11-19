@@ -128,11 +128,11 @@ router.post('/reference', function(req,res){
 	client = new Client();
 
     var args = {
-        parameters:{'q': 'squirrel'}
+        parameters:{'q': req.body.search}
     }
 
     client.get('http://data.canadensys.net/vascan/api/0.1/search.json',args, function(data,response){
-        res.send(data);
+        res.render('reference.jade', {searchResults : data});
     });
 });
 
