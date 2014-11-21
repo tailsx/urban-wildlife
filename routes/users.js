@@ -193,6 +193,7 @@ router.get('/playground', function(req,res){
 });
 
 router.post('/playground', multipartMiddleware, function(req,res){
+	client = new Client();
 
 	var args = {
         parameters:{'observation_photo[observation_id]': '1055033'}, //maybe read image file given by path.

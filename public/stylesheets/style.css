@@ -90,8 +90,8 @@ a {
 ul.list-inline > li{
   background-color: white;
   height: 100px;
-  width: 50%;
-  margin: 0px;
+  width: 45%;
+  margin: 5px;
 }
 
 ul.list-inline > li:hover{
