@@ -8,6 +8,7 @@ html(lang='en')
     title Urban Wildlife App
     link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
+    link(href='/stylesheets/test.css', rel='stylesheet')
     link(rel='icon', href='../images/icon.png')
 
 
@@ -63,7 +64,8 @@ body
             form(role='form', method='post')
               div.form-group
                 label(for='guess') Species Guess
-                input.form-control#guess(type='text', placeholder='Guess the name of your entry', name='guess')
+                div#multiple-datasets
+                  input.form-control.typeahead#guess(type='text', placeholder='Guess the name of your entry', name='guess')
               div.form-group
                 label(for='seen') Observered on(YYYY-MM-DD)
                 input.form-control#seen(type='text', placeholder='YYYY-MM-DD', name='seen')
@@ -76,3 +78,7 @@ body
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
+  script(src='/lib/typeahead.js/bloodhound.min.js')
+  script(src='/lib/typeahead.js/typeahead.bundle.min.js')
+  script(src='/lib/typeahead.js/typeahead.jquery.min.js')
+  script(src='/javascripts/autocomplete.js')
