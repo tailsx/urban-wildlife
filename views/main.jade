@@ -57,12 +57,11 @@ body
   div.container
     div.jumbotron
       div.row
-        div.col-xs-12.col-sm-5.col-md-4
-          img.img-rounded.center-block(src=pic)
-        div.col-md-offset-1
-          h1 Hello, #{info}
-          p iNaturalist profile page 
-            a(href=link) link
+        div.col-xs-6.col-sm-6
+          img.img-rounded.pull-right(src='#{userdata.user_icon_url}')
+        div.col-xs-6.col-sm-6
+          h2.pull-left Hello, #{userdata.login}
+      div#map-canvas
       div.row.voffset.text-center
         | Dashboard
       div.row
@@ -91,4 +90,6 @@ body
         
   
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
+  script(src='/javascripts/map.js')

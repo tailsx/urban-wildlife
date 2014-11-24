@@ -27,15 +27,27 @@ router.get('/main', function(req, res) {
 
 	// direct way
 	client.get(url, args, function(data, response){
-	    var parsed = JSON.parse(data);
-		res.render('main.jade',{ pic: parsed.medium_user_icon_url,
-								 link: parsed.uri,
-								 toProfile: '/users/profile',
-								 toMain: '/users/main',
-		  						 info: parsed.login,
-		  						 logout: '/logout',
-		  						 toRecords : '/users/records/'+ parsed.login,
-		  						 toNew : '/users/newrecord'});
+		var parseduser = JSON.parse(data);
+		clientmap = new Client();
+
+		var base = 'https://inaturalist.org';
+		var endpoint = '/observations/project/urban-wildlife';
+		var url = base + endpoint + '.json';
+
+	    client.get(url, args, function(datamap, response){
+		    var parsedmap = JSON.parse(datamap);
+
+		    console.log(parseduser);
+			console.log(parsedmap);
+
+			res.render('main.jade',{ userdata: parseduser,
+									 mapdata: parsedmap,
+									 toProfile: '/users/profile',
+									 toMain: '/users/main',
+			  						 logout: '/logout',
+			  						 toRecords : '/users/records/'+ parseduser.login,
+			  						 toNew : '/users/newrecord'});
+		});
 	});
 });
 
