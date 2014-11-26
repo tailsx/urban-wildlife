@@ -59,7 +59,7 @@ body
       h1 Species Name Search
       h3 We use the Canadsys database to ensure to keep our naming as consistent possible.  Enter names here to see if your names matches.
       
-      div.voffset
+      div.voffset50
       
       form(role='form', method='post')
               div.form-group
@@ -67,7 +67,7 @@ body
                 input.form-control#search(type='text', placeholder='Please enter Scientific name, Common name or VASON taxon identifier.', name='search')
               button.btn.btn-success.pull-right(type='submit') Submit
 
-      div.voffset
+      div.voffset50
 
       div.row
         if searchResults.results[0].numMatches == 0

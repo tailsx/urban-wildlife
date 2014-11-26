@@ -7,16 +7,16 @@ body{
   background-size: cover;
 }
 
-h1{
-  font-family: textFontOne;
-}
-
-h2{
+h1, h2, h3{
   font-family: textFontOne;
 }
 
 p{
   font-family: textFontFive;
+}
+
+label{
+  font-family: textFontOne;
 }
 
 /*
@@ -217,6 +217,9 @@ ul.list-inline > li > .row > a:hover{
 .voffset10{margin-top: 10px;}
 .voffset50{margin-top: 50px;}
 
+.no-padding{
+  padding: 0px !important;
+}
 
 
 /*

@@ -37,9 +37,6 @@ router.get('/main', function(req, res) {
 	    client.get(url, args, function(datamap, response){
 		    var parsedmap = JSON.parse(datamap);
 
-		    console.log(parseduser);
-			console.log(parsedmap);
-
 			res.render('main.jade',{ userdata: parseduser,
 									 mapdata: parsedmap,
 									 toProfile: '/users/profile',
@@ -115,17 +112,22 @@ router.get('/newrecord', function(req,res){
 
 router.post('/newrecord', function(req,res){
 	client = new Client();
+	console.log(req.body);
 
     var args = {
         parameters:{'observation[species_guess]': req.body.guess,
     				'observation[observed_on_string]': req.body.seen,
-    				'observation[description]': req.body.desc},
+    				'observation[description]': req.body.desc,
+    				'observation[latitude]': req.body.lat,
+    				'observation[longitide]': req.body.lon,
+    				'observation[map_scale]': 10},
         headers:{"Content-Type": "application/json",
     			"Authorization": 'Bearer ' + global.token}
     }
 
     client.post('https://inaturalist.org/observations.json',args, function(data,response){
-        res.redirect('/users/main');
+    	res.send(data);
+        //res.redirect('/users/main');
     });
 });
 
@@ -267,5 +269,5 @@ Notes:
 
 -user story, everyday users
 
-
+TUESDAY DECEMBER 9th, MEETING WITH DAVE AT 4PM
 */
