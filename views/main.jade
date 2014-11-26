@@ -98,7 +98,7 @@ body
     var infowindow = null;
     function initialize() {
       var mapOptions = {
-        zoom: 10,
+        zoom: 9,
         center: new google.maps.LatLng(43.7, -79.4)
       };
 
@@ -107,15 +107,9 @@ body
 
       setMarkers(map, sites);
       infowindow = new google.maps.InfoWindow({
+        maxWidth: 400,
         content: "loading..."
       });
-
-      var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: 'Hello World!'
-      });
-
     }
 
     var _mapdata = !{JSON.stringify(mapdata)};
@@ -131,10 +125,18 @@ body
         var temp = [];
 
         for (var i = 0; i < _mapdata.length; i++){
+          var info = '<html>' +
+                     '<head>' +
+                     '</head>' +
+                     '<body>' +
+                     '<p>' + _mapdata[i].species_guess + '</p>'+
+                     '</body>' +
+                     '</html>';
+
           temp.push([_mapdata[i].species_guess,
                      _mapdata[i].latitude,
                      _mapdata[i].longitude,
-                     'sample text' + _mapdata[i].id]);
+                     info]);
         }
 
         markers = temp;

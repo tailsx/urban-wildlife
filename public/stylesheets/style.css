@@ -107,3 +107,7 @@ ul.list-inline > li:hover{
 .voffset{margin-top: 50px;}
 
 #map-canvas{height:400px;}
+
+#map_canvas > div > div:nth-child(1) > div > div:nth-child(3) > div:nth-child(3) > div > div.gm-style-iw {
+    overflow: visible !important;
+}
