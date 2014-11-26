@@ -93,3 +93,71 @@ body
   script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
   script(src='/javascripts/map.js')
+  script(type='text/javascript').
+    var map;
+    var infowindow = null;
+    function initialize() {
+      var mapOptions = {
+        zoom: 10,
+        center: new google.maps.LatLng(43.7, -79.4)
+      };
+
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      setMarkers(map, sites);
+      infowindow = new google.maps.InfoWindow({
+        content: "loading..."
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Hello World!'
+      });
+
+    }
+
+    var _mapdata = !{JSON.stringify(mapdata)};
+
+    var sites = [
+      ['Mount Evans', 43.7, -79.4, '<p>This is Mount Evans.</p>'+_mapdata.length],
+      ['Irving Homestead', 43.9, -79.4, 'This is the Irving Homestead.'],
+      ['Badlands National Park', 43.8, -79.4, 'This is Badlands National Park'],
+      ['Flatirons in the Spring', 43.6, -79.4, 'These are the Flatirons in the spring.']
+    ];
+
+    function setMarkers(map, markers) {
+        var temp = [];
+
+        for (var i = 0; i < _mapdata.length; i++){
+          temp.push([_mapdata[i].species_guess,
+                     _mapdata[i].latitude,
+                     _mapdata[i].longitude,
+                     'sample text' + _mapdata[i].id]);
+        }
+
+        markers = temp;
+
+        for (var i = 0; i < markers.length; i++) {
+            var sites = markers[i];
+            var siteLatLng = new google.maps.LatLng(sites[1], sites[2]);
+            var marker = new google.maps.Marker({
+                position: siteLatLng,
+                map: map,
+                title: sites[0],
+                html: sites[3]
+            });
+
+            var contentString = "Some content";
+
+            google.maps.event.addListener(marker, "click", function () {
+                infowindow.setContent(this.html);
+                infowindow.open(map, this);
+            });
+        }
+    }
+
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
