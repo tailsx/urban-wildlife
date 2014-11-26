@@ -57,13 +57,10 @@ body
   div.container
     div.jumbotron
       div.row
-        div.col-xs-12.col-sm-5.col-md-4
-          img.img-rounded.center-block(src=pic)
-        div.col-md-offset-1
-          h1 Hello, #{info}
-          p iNaturalist profile page 
-            a(href=link) link
-      div.row.voffset.text-center
+        img.img-rounded.profilepic(src='#{userdata.user_icon_url}')
+        h2.welcome Hello, #{userdata.login}
+      div#map-canvas
+      div.row.voffset50.text-center
         | Dashboard
       div.row
         ul.list-inline.text-center
@@ -91,5 +88,76 @@ body
         
   
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
+  script(src='/javascripts/map.js')
+  script(type='text/javascript').
+    var map;
+    var infowindow = null;
+    function initialize() {
+      var mapOptions = {
+        zoom: 9,
+        center: new google.maps.LatLng(43.7, -79.4)
+      };
+
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      setMarkers(map, sites);
+      infowindow = new google.maps.InfoWindow({
+        maxWidth: 400,
+        content: "loading..."
+      });
+    }
+
+    var _mapdata = !{JSON.stringify(mapdata)};
+
+    var sites = [
+      ['Mount Evans', 43.7, -79.4, '<p>This is Mount Evans.</p>'+_mapdata.length],
+      ['Irving Homestead', 43.9, -79.4, 'This is the Irving Homestead.'],
+      ['Badlands National Park', 43.8, -79.4, 'This is Badlands National Park'],
+      ['Flatirons in the Spring', 43.6, -79.4, 'These are the Flatirons in the spring.']
+    ];
+
+    function setMarkers(map, markers) {
+        var temp = [];
+
+        for (var i = 0; i < _mapdata.length; i++){
+          var info = '<html>' +
+                     '<head>' +
+                     '</head>' +
+                     '<body>' +
+                     '<p>' + _mapdata[i].species_guess + '</p>'+
+                     '</body>' +
+                     '</html>';
+
+          temp.push([_mapdata[i].species_guess,
+                     _mapdata[i].latitude,
+                     _mapdata[i].longitude,
+                     info]);
+        }
+
+        markers = temp;
+
+        for (var i = 0; i < markers.length; i++) {
+            var sites = markers[i];
+            var siteLatLng = new google.maps.LatLng(sites[1], sites[2]);
+            var marker = new google.maps.Marker({
+                position: siteLatLng,
+                map: map,
+                title: sites[0],
+                html: sites[3]
+            });
+
+            var contentString = "Some content";
+
+            google.maps.event.addListener(marker, "click", function () {
+                infowindow.setContent(this.html);
+                infowindow.open(map, this);
+            });
+        }
+    }
+
+
+    google.maps.event.addDomListener(window, 'load', initialize);
 

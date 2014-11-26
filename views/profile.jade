@@ -56,11 +56,16 @@ body
 
   div.container
     div.jumbotron
-      h1 #{info}'s Profile
-      p With iNaturalist since: #{creation}
+      div.row
+        a.btn.btn-success(href='/users/main') Back to Profile
+      div.voffset10
+      div.row
+        img.img-rounded.profilepic(src='#{profile.medium_user_icon_url}')
+      h1 #{profile.login}'s Profile
+      p With iNaturalist since: #{profile.created_at}
       p Observation count: 
-        a(href=toRecords) #{count}
-      p E-mail: #{email}
+        a(href=toRecords) #{profile.observations_count}
+      p E-mail: #{profile.email}
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')

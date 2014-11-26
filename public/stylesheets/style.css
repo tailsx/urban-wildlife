@@ -7,6 +7,49 @@ body{
   background-size: cover;
 }
 
+h1{
+  font-family: textFontOne;
+}
+
+h2{
+  font-family: textFontOne;
+}
+
+p{
+  font-family: textFontFive;
+}
+
+/*
+ *  
+ *  Fonts
+ *  
+ */
+
+@font-face {
+    font-family: textFontOne;
+    src: url(../fonts/francois-one/FrancoisOne.ttf);
+}
+
+@font-face {
+    font-family: textFontTwo;
+    src: url(../fonts/quicksand/Quicksand-Bold.otf);
+}
+
+@font-face {
+    font-family: textFontThree;
+    src: url(../fonts/chuckfive/Chunkfive.otf);
+}
+
+@font-face {
+    font-family: textFontFour;
+    src: url(../fonts/sansation/Sansation-Regular.ttf);
+}
+
+@font-face {
+    font-family: textFontFive;
+    src: url(../fonts/aller/Aller_Rg.ttf);
+}
+
 #test {
   background: url('../images/citybackdrop.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -27,22 +70,6 @@ a {
 
 .container > .jumbotron{
   background-color: #f5f5f5;
-}
-
-.record:nth-of-type(odd){
-  padding-top: 30px;
-  padding-bottom: 30px;
-  background-color: #CCEBD6;
-}
-
-.record:nth-of-type(even){
-  padding-top: 30px;
-  padding-bottom: 30px;
-  background-color: #4DB870;
-}
-
-.hidden{
-  opacity: 0;
 }
 
 #enter{
@@ -87,11 +114,16 @@ a {
   background-color: #f5f5f5;
 }
 
+/*
+ *
+ * Dashboard
+ *
+ */
 ul.list-inline > li{
   background-color: white;
   height: 100px;
   width: 45%;
-  margin: 5px;
+  margin: 10px;
 }
 
 ul.list-inline > li:hover{
@@ -99,9 +131,105 @@ ul.list-inline > li:hover{
   border: 1px solid black;
 }
 
+ul.list-inline > li > .row > a:link{
+  color: #4DB870;
+  font-weight:500;
+}
+
+ul.list-inline > li > .row > a:visited{
+  color: #4DB870;
+  font-weight:500;
+}
+
+ul.list-inline > li > .row > a:hover{
+  color: #4DB870;
+  font-weight:bold;
+}
+
 .mainIcon > span, .glyphicon .glyphicon-plus{
   margin-top: 10px;
   font-size: 26px;
 }
 
-.voffset{margin-top: 50px;}
+#map-canvas{height:400px;}
+
+#map_canvas > div > div:nth-child(1) > div > div:nth-child(3) > div:nth-child(3) > div > div.gm-style-iw {
+    overflow: visible !important;
+}
+
+
+/*
+ *  
+ *  Records
+ *  
+ */
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.record:nth-of-type(odd){
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #CCEBD6;
+}
+
+.record:nth-of-type(even){
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #4DB870;
+}
+
+.record-info > h2{
+  font-family: textFontThree;
+  margin-top: 0px;
+}
+
+.record-info > p{
+  font-family: textFontFive;
+  font-size: 16px;
+}
+
+.record:nth-of-type(odd) > .container > .row > .record-info > p > a:link{
+  color: #4DB870;
+}
+
+.record:nth-of-type(odd) > .container > .row > .record-info > p > a:visited{
+  color: #4DB870;
+}
+
+.record:nth-of-type(even) > .container > .row > .record-info > p > a:link{
+  color: #CCEBD6;
+}
+
+.record:nth-of-type(even) > .container > .row > .record-info > p > a:visited{
+  color: #CCEBD6;
+}
+
+/*
+ *  
+ *  Spacing
+ *  
+ */
+
+.voffset10{margin-top: 10px;}
+.voffset50{margin-top: 50px;}
+
+
+
+/*
+ *  
+ *  Profile
+ *  
+ */
+.profilepic {
+  margin-left: 19px;
+  float:left;
+}
+
+.welcome{
+  position: relative;
+  left: 20px;
+}
