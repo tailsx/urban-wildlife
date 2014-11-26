@@ -6,6 +6,7 @@ html(lang='en')
     meta(name='description', content='Urban Wildlife web app using iNaturalist database')
     meta(name='author', content='Zhi Hao (David) Chen')
     title Urban Wildlife App
+    link(href='http://fonts.googleapis.com/css?family=Montserrat:700,400', rel='stylesheet',type='text/css')
     link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
     link(rel='icon', href='../../images/icon.png')
@@ -61,19 +62,29 @@ body
       h1 List all records
       for result in results
         div.row.record
-          if result.latitude == null && result.longitude == null
-            p No coordinates given.  Sorry
-          else
-            img(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=#{result.map_scale}&size=600x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
-          p Species Guess: #{result.species_guess}
-          if result.description == ""
-            p Description: No Description available
-          else
-            p Description: #{result.description}
-          p Photos:
-          for photo in result.photos
-            p #{photo.square_url}
-            img(src=photo.medium_url)
+          div.container
+            div.row
+              div.col-xs-4
+                if result.latitude != null && result.longitude != null
+                  img.center-block(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=#{result.map_scale}&size=300x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
+                  p.text-center Nearest city: #{result.place_guess}
+                else
+                  p Can not display map.  No coordinates given
+              div.col-xs-8.record-info
+                h2 #{result.species_guess}
+                p Original link: 
+                  a(href='#{result.uri}') iNaturalist link
+            div.row
+              button.btn.btn-default.pull-right(type='button', data-toggle='collapse', data-target='.photos-section') Toggle Pictures
+            div.voffset10
+            div.row.collapse.in.photos-section
+              if result.photos.length == 0
+                p No photos
+              else  
+                for photo in result.photos
+                  div.col-xs-4.text-center
+                    img(src=photo.small_url)
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
+  script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
