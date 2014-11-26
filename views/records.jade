@@ -67,23 +67,36 @@ body
               div.col-xs-4
                 if result.latitude != null && result.longitude != null
                   img.center-block(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=#{result.map_scale}&size=300x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
-                  p.text-center Nearest city: #{result.place_guess}
+                  p.text-center Nearest city: 
+                    b #{result.place_guess}
                 else
                   p Can not display map.  No coordinates given
               div.col-xs-8.record-info
                 h2 #{result.species_guess}
-                p Original link: 
+                p 
+                  b ID Number:
+                  |  #{result.id}
+                p 
+                  b Original link: 
                   a(href='#{result.uri}') iNaturalist link
+                p 
+                  b Identification Count:
+                  |  #{result.identifications_count}
+                p 
+                  b Identification Count:
+                  |  #{result.identifications_count}
             div.row
               button.btn.btn-default.pull-right(type='button', data-toggle='collapse', data-target='.photos-section') Toggle Pictures
             div.voffset10
             div.row.collapse.in.photos-section
               if result.photos.length == 0
-                p No photos
+                p No were added to this observation
               else  
                 for photo in result.photos
                   div.col-xs-4.text-center
-                    img(src=photo.small_url)
+                    a(href=photo.medium_url)
+                      img(src=photo.small_url)
+
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')

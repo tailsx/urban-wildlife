@@ -15,6 +15,16 @@ h2{
   font-family: textFontOne;
 }
 
+p{
+  font-family: textFontFive;
+}
+
+/*
+ *  
+ *  Fonts
+ *  
+ */
+
 @font-face {
     font-family: textFontOne;
     src: url(../fonts/francois-one/FrancoisOne.ttf);
@@ -62,10 +72,6 @@ a {
   background-color: #f5f5f5;
 }
 
-.hidden{
-  opacity: 0;
-}
-
 #enter{
   margin-top: 40%;
   height: 60px;
@@ -108,11 +114,16 @@ a {
   background-color: #f5f5f5;
 }
 
+/*
+ *
+ * Dashboard
+ *
+ */
 ul.list-inline > li{
   background-color: white;
   height: 100px;
-  width: 50%;
-  margin: 0px;
+  width: 45%;
+  margin: 10px;
 }
 
 ul.list-inline > li:hover{
@@ -120,13 +131,25 @@ ul.list-inline > li:hover{
   border: 1px solid black;
 }
 
+ul.list-inline > li > .row > a:link{
+  color: #4DB870;
+  font-weight:500;
+}
+
+ul.list-inline > li > .row > a:visited{
+  color: #4DB870;
+  font-weight:500;
+}
+
+ul.list-inline > li > .row > a:hover{
+  color: #4DB870;
+  font-weight:bold;
+}
+
 .mainIcon > span, .glyphicon .glyphicon-plus{
   margin-top: 10px;
   font-size: 26px;
 }
-
-.voffset10{margin-top: 10px;}
-.voffset50{margin-top: 50px;}
 
 #map-canvas{height:400px;}
 
@@ -134,6 +157,12 @@ ul.list-inline > li:hover{
     overflow: visible !important;
 }
 
+
+/*
+ *  
+ *  Records
+ *  
+ */
 .row-no-padding {
   [class*="col-"] {
     padding-left: 0 !important;
@@ -177,4 +206,30 @@ ul.list-inline > li:hover{
 
 .record:nth-of-type(even) > .container > .row > .record-info > p > a:visited{
   color: #CCEBD6;
+}
+
+/*
+ *  
+ *  Spacing
+ *  
+ */
+
+.voffset10{margin-top: 10px;}
+.voffset50{margin-top: 50px;}
+
+
+
+/*
+ *  
+ *  Profile
+ *  
+ */
+.profilepic {
+  margin-left: 19px;
+  float:left;
+}
+
+.welcome{
+  position: relative;
+  left: 20px;
 }

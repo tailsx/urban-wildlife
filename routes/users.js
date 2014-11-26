@@ -74,12 +74,9 @@ router.get('/profile', function(req,res){
 	            // raw response
 	            //console.log(response);
 	res.render('profile.jade',{ toMain: '/users/main',
-		  						info: parsed.login,
-		  						creation: parsed.created_at,
-		  						count: parsed.observations_count,
-		  						email: parsed.email,
 		  						toRecords : '/users/records/'+parsed.login,
-		  						toNew : '/users/newrecord'});
+		  						toNew : '/users/newrecord',
+		  						profile: parsed});
 	});
 });
 

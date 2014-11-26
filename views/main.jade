@@ -57,10 +57,8 @@ body
   div.container
     div.jumbotron
       div.row
-        div.col-xs-6.col-sm-6
-          img.img-rounded.pull-right(src='#{userdata.user_icon_url}')
-        div.col-xs-6.col-sm-6
-          h2.pull-left Hello, #{userdata.login}
+        img.img-rounded.profilepic(src='#{userdata.user_icon_url}')
+        h2.welcome Hello, #{userdata.login}
       div#map-canvas
       div.row.voffset50.text-center
         | Dashboard
