@@ -7,6 +7,7 @@ var Client = require('node-rest-client').Client;
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 var fs = require('fs')
+var rest = require('restler');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -204,54 +205,22 @@ router.get('/playground', function(req,res){
 });
 
 router.post('/playground', multipartMiddleware, function(req,res){
-
-	var args = {
-        parameters:{'observation_photo[observation_id]': '1055033'}, //maybe read image file given by path.
-        data : {'file' : req.files.file.ws},
-        headers:{'Authorization': 'Bearer ' + global.token}
-    }
-
-    client.post('https://inaturalist.org/observation_photos',args, function(data,response){
-        //console.log(response);
-        //console.log(data);
-        console.log("something");
-       	console.log(response.body);
-       	res.send("parsed");
-    });
-    //content = data;
-
-    // Invoke the next step here however you like
-    //res.send(content);   // Put all of the code here (not the best solution)
-
-/*	console.log(req.files);
-	console.log(req.files.file);
-	//1055035
-	var options = {
-		url: 'https://inaturalist.org/observation_photos',
-		formData: req.files.file
-	};
-
-	request.post(options, function optionalCallback(err, httpResponse, body) {
-	  if (err) {
-	    return console.error('upload failed:', err);
-	  }
-	  console.log(httpResponse);
-	  console.log('Upload successful!  Server responded with:', body);
-	  res.send(body);
-	});*/
-
-/*    var args = {
-        parameters:{'observation_photo[observation_id]': '1055033',
-    				'file' : req}, //maybe read image file given by path.
-        headers:{'Authorization': 'Bearer ' + global.token}
-    }
-
-    client.post('https://inaturalist.org/observation_photos',args, function(data,response){
-        //console.log(response);
-        //console.log(data);
-        console.log("something");
-        res.send(data);
-    });*/
+	rest.post('https://inaturalist.org/observation_photos/',{
+		multipart: true,
+		accessToken: global.token,
+		data: {
+			'observation_photo[observation_id]': 1056284,
+			'file': rest.file(req.files.file.path,
+							  req.files.file.name,
+							  req.files.file.size,
+							  null,
+							  req.files.file.type)
+		}
+	}).on('complete', function(data,response){
+		console.log(data);
+		console.log(response);
+		res.send(response.body);
+	});
 
 });
 
