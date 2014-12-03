@@ -48,12 +48,13 @@ router.get('/oauth2callback', function(req, res) {
 
 router.get('/signup', function(req, res){
     var locals = {
-        title: 'This is my CODE app',
+        messages: [],
         url: gapi.url,
         signup: '/signup'
       };
   res.render('signup.jade', locals);
 });
+
 
 router.post('/signup', function(req, res){
   client = new Client();
@@ -71,16 +72,13 @@ router.post('/signup', function(req, res){
         console.log(parsed);
         console.log(parsed.errors);
         if (parsed.errors==undefined){
-          console.log(parsed);
-          console.log(parsed.login);
-          //res.cookie('user', parsed.login, { maxAge: 900000, httpOnly: true });
-          res.redirect('users/main');
+          res.redirect(gapi.url);
         }
         else{
           console.log("errors oops");
           console.log(parsed);
           var locals = {
-                title: 'This is my CODE app',
+                messages: parsed.errors,
                 url: gapi.url,
                 signup: '/signup'
               };

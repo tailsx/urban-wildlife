@@ -72,7 +72,13 @@ body
                 input.form-control#seen(type='text', placeholder='YYYY-MM-DD', name='seen')
               div.form-group
                 label(for='desc') Description
-                input.form-control#desc(type='text', placeholder='Describe stuff', name='desc')
+                textarea.form-control#desc(rows='5', placeholder='Describe stuff', name='desc')
+              div.form-group.col-xs-6.no-padding
+                label(for='lon') Longitude
+                input.form-control#lon(type='text', placeholder='Longitudinal Coordinate', name='lon')
+              div.form-group.col-xs-6.no-padding
+                label(for='lat') Latitude
+                input.form-control#lat(type='text', placeholder='Latitudinal Coordinate', name='lat')
               button.btn.btn-success(type='submit') Submit
               a.btn.btn-default(href='/users/main') Cancel
 

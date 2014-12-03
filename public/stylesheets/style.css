@@ -7,16 +7,16 @@ body{
   background-size: cover;
 }
 
-h1{
-  font-family: textFontOne;
-}
-
-h2{
+h1, h2, h3{
   font-family: textFontOne;
 }
 
 p{
   font-family: textFontFive;
+}
+
+label{
+  font-family: textFontOne;
 }
 
 /*
@@ -49,6 +49,18 @@ p{
     font-family: textFontFive;
     src: url(../fonts/aller/Aller_Rg.ttf);
 }
+
+
+/*
+ *  
+ *  Bootstrap Fixes
+ *  
+ */
+.form-horizontal .control-label{
+/* text-align:right; */
+    text-align:left;
+}
+
 
 #test {
   background: url('../images/citybackdrop.jpg') no-repeat center center fixed;
@@ -217,6 +229,9 @@ ul.list-inline > li > .row > a:hover{
 .voffset10{margin-top: 10px;}
 .voffset50{margin-top: 50px;}
 
+.no-padding{
+  padding: 0px !important;
+}
 
 
 /*
@@ -233,3 +248,20 @@ ul.list-inline > li > .row > a:hover{
   position: relative;
   left: 20px;
 }
+<<<<<<< HEAD
+=======
+
+.errors{
+  text-align: center;
+  color: red;
+  font-size: 14px !important;
+  margin-bottom: 5px !important;
+}
+
+.message{
+  text-align: center;
+  color: red;
+  font-size: 14px !important;
+  margin-bottom: 5px !important;
+}
+>>>>>>> develop

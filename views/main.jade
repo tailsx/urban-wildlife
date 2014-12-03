@@ -61,7 +61,7 @@ body
         h2.welcome Hello, #{userdata.login}
       div#map-canvas
       div.row.voffset50.text-center
-        | Dashboard
+        p Dashboard
       div.row
         ul.list-inline.text-center
           li.list-group-item
@@ -69,7 +69,7 @@ body
               span.glyphicon.glyphicon-plus
             div.row
               a(href='/users/newrecord') Add record
-          li.list-group-item
+          li.list-group-item.hidden
             div.row.mainIcon
               span.glyphicon.glyphicon-picture
             div.row
@@ -79,7 +79,7 @@ body
               span.glyphicon.glyphicon-info-sign
             div.row
               a(href='/users/reference') Species Names
-          li.list-group-item
+          li.list-group-item.hidden
             div.row.mainIcon
               span.glyphicon.glyphicon-list-alt
             div.row
