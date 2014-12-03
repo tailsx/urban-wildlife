@@ -50,6 +50,18 @@ label{
     src: url(../fonts/aller/Aller_Rg.ttf);
 }
 
+
+/*
+ *  
+ *  Bootstrap Fixes
+ *  
+ */
+.form-horizontal .control-label{
+/* text-align:right; */
+    text-align:left;
+}
+
+
 #test {
   background: url('../images/citybackdrop.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -235,4 +247,18 @@ ul.list-inline > li > .row > a:hover{
 .welcome{
   position: relative;
   left: 20px;
+}
+
+.errors{
+  text-align: center;
+  color: red;
+  font-size: 14px !important;
+  margin-bottom: 5px !important;
+}
+
+.message{
+  text-align: center;
+  color: red;
+  font-size: 14px !important;
+  margin-bottom: 5px !important;
 }

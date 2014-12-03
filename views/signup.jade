@@ -32,6 +32,9 @@ body
 
   div.container
     div.jumbotron
+      div.row
+        for m in messages
+          p.errors #{m}
       h1 Register an iNaturalist account
       div.row
         div.text-center
@@ -57,6 +60,9 @@ body
               div.col-sm-8
                 input.form-control#description(type='text', placeholder='Little blurb about yourself', name='description')
             button.btn.btn-default(type='submit') Join iNaturalist
+      div.voffset50
+      div.row
+        p Note: After signing up, you will have to log in again to iNaturalist for us to gain access to your data.  Be sure to also authorize our app when prompted!
   
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
