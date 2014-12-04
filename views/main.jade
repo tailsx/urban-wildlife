@@ -57,11 +57,11 @@ body
   div.container
     div.jumbotron
       div.row
-        img.img-rounded.profilepic(src='#{userdata.user_icon_url}')
+        img.img-rounded.iconpic(src='#{profilepic}')
         h2.welcome Hello, #{userdata.login}
       div#map-canvas
       div.row.voffset50.text-center
-        p Dashboard
+        a(href='/users/playground2') Dashboard
       div.row
         ul.list-inline.text-center
           li.list-group-item

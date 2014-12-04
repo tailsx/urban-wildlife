@@ -38,8 +38,16 @@ router.get('/main', function(req, res) {
 	    client.get(url, args, function(datamap, response){
 		    var parsedmap = JSON.parse(datamap);
 
+		    var picturelink;
+		    if (parseduser.user_icon_url == undefined)
+		    	picturelink = '/images/defaultUser.png';
+		    else
+		    	picturelink = parseduser.user_icon_url;
+
+
 			res.render('main.jade',{ userdata: parseduser,
 									 mapdata: parsedmap,
+									 profilepic: picturelink,
 									 toProfile: '/users/profile',
 									 toMain: '/users/main',
 			  						 logout: '/logout',
@@ -63,18 +71,22 @@ router.get('/profile', function(req,res){
 
     // direct way
 	client.get(url,args, function(data, response){
-	            // parsed response body as js object
-	            //console.log(data);
-	            var parsed = JSON.parse(data);
-	      		console.log(parsed);
-	      		//console.log(parsed[1].photos[0].medium_url);
+	    // parsed response body as js object
+	    //console.log(data);
+	    var parsed = JSON.parse(data);
+		console.log(parsed);
 
-	            // raw response
-	            //console.log(response);
-	res.render('profile.jade',{ toMain: '/users/main',
+		var picturelink;
+	    if (parsed.user_icon_url == undefined)
+	    	picturelink = '/images/defaultUser.png';
+	    else
+	    	picturelink = parsed.medium_user_icon_url;
+
+		res.render('profile.jade',{ toMain: '/users/main',
 		  						toRecords : '/users/records/'+parsed.login,
 		  						toNew : '/users/newrecord',
-		  						profile: parsed});
+		  						profile: parsed,
+		  						profilepic: picturelink});
 	});
 });
 
@@ -111,8 +123,8 @@ router.get('/newrecord', function(req,res){
 	  });
 });
 
-router.post('/newrecord', function(req,res){
-	client = new Client();
+router.post('/newrecord', multipartMiddleware, function(req,res){
+/*	client = new Client();
 	console.log(req.body);
 
     var args = {
@@ -129,7 +141,24 @@ router.post('/newrecord', function(req,res){
     client.post('https://inaturalist.org/observations.json',args, function(data,response){
     	res.send(data);
         //res.redirect('/users/main');
-    });
+    });*/
+	rest.post('https://inaturalist.org/observations.json',{
+		accessToken: global.token,
+		multipart: true,
+		data: {
+			'observation[species_guess]': req.body.guess,
+			'observation[observed_on_string]': req.body.seen,
+			'observation[description]': req.body.desc,
+			'local_photos[0]': rest.file(req.files.file.path,
+							  req.files.file.name,
+							  req.files.file.size,
+							  null,
+							  req.files.file.type)
+		}
+	}).on('complete', function(data,response){
+		console.log(data);
+		res.send(data);
+	});
 });
 
 router.get('/reference', function(req,res){
@@ -209,7 +238,7 @@ router.post('/playground', multipartMiddleware, function(req,res){
 		multipart: true,
 		accessToken: global.token,
 		data: {
-			'observation_photo[observation_id]': 1056284,
+			'observation_photo[observation_id]': 1091193,
 			'file': rest.file(req.files.file.path,
 							  req.files.file.name,
 							  req.files.file.size,
@@ -219,9 +248,26 @@ router.post('/playground', multipartMiddleware, function(req,res){
 	}).on('complete', function(data,response){
 		console.log(data);
 		console.log(response);
-		res.send(response.body);
+		res.redirect('/users/main');
 	});
 
+});
+
+router.get('/playground2', function(req,res){
+	rest.post('https://inaturalist.org/observations.json',{
+		accessToken: global.token,
+		data: {
+			'observation[species_guess]': req.body.guess,
+			'observation[observed_on_string]': req.body.seen,
+			'observation[description]': req.body.desc,
+			'observation[latitude]': req.body.lat,
+			'observation[longitide]': req.body.lon,
+			'observation[place_guess]': 'toronto,ontario'
+		}
+	}).on('complete', function(data,response){
+		console.log(data);
+		res.send(data);
+	});
 });
 
 module.exports = router;
@@ -238,5 +284,5 @@ Notes:
 
 -user story, everyday users
 
-TUESDAY DECEMBER 9th, MEETING WITH DAVE AT 4PM
+TUESDAY DECEMBER 9th, MEETING WITH STEVE AT 4PM
 */

@@ -58,29 +58,33 @@ body
 
   div.container
     div.row
-      div.text-center
-        img.img-thumbnail(src='../images/placeholder.png')
-        div.container
-          div.jumbotron
-            form(role='form', method='post')
-              div.form-group
-                label(for='guess') Species Guess
-                div#canadensys
-                  input.form-control.typeahead#guess(type='text', placeholder='Guess the name of your entry', name='guess')
-              div.form-group
-                label(for='seen') Observered on(YYYY-MM-DD)
-                input.form-control#seen(type='text', placeholder='YYYY-MM-DD', name='seen')
-              div.form-group
-                label(for='desc') Description
-                textarea.form-control#desc(rows='5', placeholder='Describe stuff', name='desc')
-              div.form-group.col-xs-6.no-padding
-                label(for='lon') Longitude
-                input.form-control#lon(type='text', placeholder='Longitudinal Coordinate', name='lon')
-              div.form-group.col-xs-6.no-padding
-                label(for='lat') Latitude
-                input.form-control#lat(type='text', placeholder='Latitudinal Coordinate', name='lat')
-              button.btn.btn-success(type='submit') Submit
-              a.btn.btn-default(href='/users/main') Cancel
+      div.container
+        div.jumbotron
+          h1 Enter New Observation
+          p Please enter as much information as you can.  Leaving fields blank will still be ok.
+          div.voffset50
+          form(role='form', method='post', enctype='multipart/form-data')
+            div.form-group
+              label(for='image') Photo
+              input.form-control#image(type='file', accept='image/*', name='file')
+            div.form-group
+              label(for='guess') Species Guess
+              div#canadensys
+                input.form-control.typeahead#guess(type='text', placeholder='Guess the name of your entry', name='guess')
+            div.form-group
+              label(for='seen') Observered on(YYYY-MM-DD)
+              input.form-control#seen(type='text', placeholder='YYYY-MM-DD', name='seen')
+            div.form-group
+              label(for='desc') Description
+              textarea.form-control#desc(rows='5', placeholder='Describe stuff', name='desc')
+            div.form-group.col-xs-6.no-padding
+              label(for='lon') Longitude
+              input.form-control#lon(type='number', placeholder='Longitudinal Coordinate', name='lon')
+            div.form-group.col-xs-6.no-padding
+              label(for='lat') Latitude
+              input.form-control#lat(type='number', placeholder='Latitudinal Coordinate', name='lat')
+            button.btn.btn-success(type='submit') Submit
+            a.btn.btn-default(href='/users/main') Cancel
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

@@ -239,17 +239,24 @@ ul.list-inline > li > .row > a:hover{
  *  Profile
  *  
  */
-.profilepic {
+.iconpic {
   margin-left: 19px;
   float:left;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.iconpic {
+  margin-left: 19px;
+  float:left;
+  height: 48px !important;
+  width: 48px !important;
 }
 
 .welcome{
   position: relative;
   left: 20px;
 }
-<<<<<<< HEAD
-=======
 
 .errors{
   text-align: center;
@@ -264,4 +271,4 @@ ul.list-inline > li > .row > a:hover{
   font-size: 14px !important;
   margin-bottom: 5px !important;
 }
->>>>>>> develop
+
