@@ -124,41 +124,42 @@ router.get('/newrecord', function(req,res){
 });
 
 router.post('/newrecord', multipartMiddleware, function(req,res){
-/*	client = new Client();
-	console.log(req.body);
-
-    var args = {
-        parameters:{'observation[species_guess]': req.body.guess,
-    				'observation[observed_on_string]': req.body.seen,
-    				'observation[description]': req.body.desc,
-    				'observation[latitude]': req.body.lat,
-    				'observation[longitide]': req.body.lon,
-    				'observation[map_scale]': 10},
-        headers:{"Content-Type": "application/json",
-    			"Authorization": 'Bearer ' + global.token}
-    }
-
-    client.post('https://inaturalist.org/observations.json',args, function(data,response){
-    	res.send(data);
-        //res.redirect('/users/main');
-    });*/
-	rest.post('https://inaturalist.org/observations.json',{
-		accessToken: global.token,
-		multipart: true,
-		data: {
-			'observation[species_guess]': req.body.guess,
-			'observation[observed_on_string]': req.body.seen,
-			'observation[description]': req.body.desc,
-			'local_photos[0]': rest.file(req.files.file.path,
-							  req.files.file.name,
-							  req.files.file.size,
-							  null,
-							  req.files.file.type)
-		}
-	}).on('complete', function(data,response){
-		console.log(data);
-		res.send(data);
-	});
+	if (req.files.file.size == 0){
+		rest.post('https://inaturalist.org/observations.json',{
+			accessToken: global.token,
+			data: {
+				'observation[species_guess]': req.body.guess,
+				'observation[observed_on_string]': req.body.seen,
+				'observation[description]': req.body.desc,
+				'observation[place_guess]': req.body.place,
+				'observation[tag_list]': req.body.tag
+			}
+		}).on('complete', function(data,response){
+			console.log(data);
+			res.redirect('records/' + data[0].user_login);
+		});
+	}
+	else{
+		rest.post('https://inaturalist.org/observations.json',{
+			accessToken: global.token,
+			multipart: true,
+			data: {
+				'observation[species_guess]': req.body.guess,
+				'observation[observed_on_string]': req.body.seen,
+				'observation[description]': req.body.desc,
+				'observation[place_guess]': req.body.place,
+				'observation[tag_list]': req.body.tag,
+				'local_photos[0]': rest.file(req.files.file.path,
+								  req.files.file.name,
+								  req.files.file.size,
+								  null,
+								  req.files.file.type)
+			}
+		}).on('complete', function(data,response){
+			console.log(data);
+			res.redirect('records/' + data[0].user_login);
+		});
+	}
 });
 
 router.get('/reference', function(req,res){
@@ -257,12 +258,17 @@ router.get('/playground2', function(req,res){
 	rest.post('https://inaturalist.org/observations.json',{
 		accessToken: global.token,
 		data: {
-			'observation[species_guess]': req.body.guess,
-			'observation[observed_on_string]': req.body.seen,
-			'observation[description]': req.body.desc,
-			'observation[latitude]': req.body.lat,
-			'observation[longitide]': req.body.lon,
-			'observation[place_guess]': 'toronto,ontario'
+			'observation[species_guess]': 'Testiddng',
+			'observation[id_please]': '0',
+			'observation[observed_on_string]': '2014-12-04',
+			'observation[description]': 'Trying something',
+			'observation[place_guess]': 'toronto,ontario',
+			'observation[latitude]': '43.77872259999999',
+			'observation[longitide]': '-79.9527607',
+			'observation[location_is_exact]': 'false',
+			'observation[map_scale]': '10',
+			'observation[positional_accuracy]': '31072',
+			'observation[geoprivacy]': 'open'
 		}
 	}).on('complete', function(data,response){
 		console.log(data);

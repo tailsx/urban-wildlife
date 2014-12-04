@@ -57,34 +57,32 @@ body
               |  Logout
 
   div.container
-    div.row
-      div.container
-        div.jumbotron
-          h1 Enter New Observation
-          p Please enter as much information as you can.  Leaving fields blank will still be ok.
-          div.voffset50
-          form(role='form', method='post', enctype='multipart/form-data')
-            div.form-group
-              label(for='image') Photo
-              input.form-control#image(type='file', accept='image/*', name='file')
-            div.form-group
-              label(for='guess') Species Guess
-              div#canadensys
-                input.form-control.typeahead#guess(type='text', placeholder='Guess the name of your entry', name='guess')
-            div.form-group
-              label(for='seen') Observered on(YYYY-MM-DD)
-              input.form-control#seen(type='date', placeholder='YYYY-MM-DD', name='seen')
-            div.form-group
-              label(for='desc') Description
-              textarea.form-control#desc(rows='5', placeholder='Describe stuff', name='desc')
-            div.form-group
-              label(for='place') Place Guess
-              input.form-control#place(type='text', placeholder='Guess nearest city and province', name='place')
-            div.form-group
-              label(for='tag') List of Tags
-              input.form-control#tag(type='text', placeholder='Ex. bird, male, grey', name='tag')
-            button.btn.btn-success(type='submit') Submit
-            a.btn.btn-default(href='/users/main') Cancel
+    div.jumbotron
+      div.row
+        a.btn.btn-success(href='/users/main') Back to Profile
+      h1 List of projects near Toronto
+      for project in projects
+        div.row.record
+          div.container
+            div.row
+              div.col-xs-2
+                if project.icon_url != null
+                  img.img-rounded.profilepic.center-block(src='#{project.icon_url}')
+                else
+                  img.img-rounded.profilepic.center-block(src='/images/defaultprojects.png')
+              div.col-xs-10.record-info
+                h2 #{project.title}
+                p 
+                  b Description:
+                  if project.description == "" 
+                    i  None
+                  else
+                    i  #{project.description}
+                p 
+                  b Observation count: 
+                  |  #{project.project_observations_count}
+                p
+                  a.pull-right(href='/projects/' + project.id) View Project
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

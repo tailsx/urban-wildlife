@@ -6,6 +6,7 @@ var http = require('http');
 var fs = require('fs');
 var request = require('request');
 var Client = require('node-rest-client').Client;
+var rest = require('restler');
 
 var token; //For now, store token in a variable for later use
 var basesite = 'http://localhost:3000';
@@ -152,6 +153,27 @@ router.get('/logout', function(req, res){
       };
   token=undefined;
   res.redirect('/');
+});
+
+router.get('/projects', function(req, res){
+  // Get projects from around Toronto
+  rest.get('http://www.inaturalist.org/projects.json',{
+    query:{
+      'page': 1,
+      'latitude': 43.6532260000,
+      'longitude': -79.3831840000
+    }
+  }).on('complete', function(data,response){
+      res.render('projects.jade',{projects: data});
+  });
+});
+
+router.get('/projects/:id', function(req, res){
+  // Get projects from around Toronto
+  rest.get('http://www.inaturalist.org/observations/project/' + req.params.id + '.json')
+      .on('complete', function(data,response){
+        res.render('projectrecords.jade',{results: data});
+  });
 });
 
 /* example in calling app */
