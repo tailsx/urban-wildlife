@@ -81,8 +81,12 @@ body
                 p 
                   b Observation count: 
                   |  #{project.project_observations_count}
+                p 
+                  b Last Updated: 
+                  |  #{project.updated_at}
                 p
                   a.pull-right(href='/projects/' + project.id) View Project
+
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
