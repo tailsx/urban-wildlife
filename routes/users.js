@@ -56,11 +56,13 @@ router.get('/main', function(req, res) {
 		});
 	});*/
 
+  //Get user's data
   rest.get('http://www.inaturalist.org/users/edit.json',{
     headers:{"Content-Type": "application/json"},
     accessToken: req.cookies.token
   })
   .on('complete', function(user,response){
+  	//Also get all observations in hardcoded urban wildlife project
   	rest.get('http://www.inaturalist.org/observations/project/urban-wildlife.json')
     	.on('complete', function(map,response){
       	  res.render('main.jade',{userdata: user,
@@ -138,7 +140,7 @@ router.get('/records/:username', function(req,res){
   	    res.render('records.jade',{ toMain: '/users/main',
 									toProfile: '/users/profile',
 			  						info: req.params.username,
-			  						results: parsed,
+			  						results: data,
 			  					    toNew : '/users/newrecord'});
   });
 });

@@ -81,17 +81,14 @@ body
                   else
                     i  #{result.description}
                 p 
-                  b Identification Count:
-                  |  #{result.identifications_count}
-                p 
                   b Observed on:
                   if (result.observed_on == null)
                     |  Unknown
                   else
                     |  #{result.observed_on}
                 p 
-                  b Original link: 
-                  a(href='#{result.uri}') iNaturalist link
+                  a(href='/observations/#{result.id}') Click Here
+                  |  for more information
 
             div.row.photos-toggler
               h3.pull-right Show #{result.observation_photos_count} Photo(s) 

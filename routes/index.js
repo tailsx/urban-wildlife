@@ -114,19 +114,12 @@ router.post('/signup', function(req, res){
 });
 
 router.get('/logout', function(req, res){
-/*  var r = request.get({
-    url: 'https://inaturalist.org/logout',
-    headers: { 'Authorization': 'Bearer ' + token }
-    }, function(err, res, body){
-      console.log(res.status);
-      console.log(err);
-    });
-  var locals = {
-        title: 'This is my TEST app',
-        url: gapi.url
-      };*/
-  global.token=undefined;
-  res.redirect('/');
+  rest.get('http://www.inaturalist.org/logout')
+      .on('complete', function(data,response){
+        res.clearCookie('user');
+        res.clearCookie('token');
+        res.redirect('/');
+      });
 });
 
 router.get('/projects', function(req, res){

@@ -48,7 +48,7 @@ body
               span.glyphicon.glyphicon-user
               |  Profile
           li
-            a(href='../')
+            a(href='/logout')
               span.glyphicon.glyphicon-log-out
               |  Logout
 
@@ -129,6 +129,7 @@ body
                      '</head>' +
                      '<body>' +
                      '<h3>' + _mapdata[i].species_guess + '</h3>'+
+                     '<h5><a href="/observations/'+ _mapdata[i].id + '"> View observation</a></h5>' + 
                      '</body>' +
                      '</html>';
 

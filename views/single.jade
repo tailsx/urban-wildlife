@@ -63,12 +63,12 @@ body
         div.container
           div.row
             div.col-xs-4
-                if observation.latitude != null && observation.longitude != null
+                if (observation.latitude != null && observation.longitude != null)
                   img.center-block(src='https://maps.googleapis.com/maps/api/staticmap?center=#{observation.latitude},#{observation.longitude}&zoom=#{observation.map_scale}&size=300x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{observation.latitude},#{observation.longitude}')
                   p.text-center Nearest city: 
                     b #{observation.place_guess}
                 else
-                  p Can not display map.  No coordinates given
+                  img.center-block.missingpic(src='/images/defaultmap.png')
             div.col-xs-8.record-info
                 h2 #{observation.species_guess}
                 p 
@@ -97,9 +97,9 @@ body
                   a(href='#{observation.uri}') iNaturalist link
 
           div.row.projects
-            p Projects
+            h3.hoffset10 Projects
             if (observation.project_observations.length == 0)
-              p Not added into any project
+              p.hoffset30 Not added into any project
             else
               for project in observation.project_observations
                 div.col-xs-6.col-sm-3
@@ -119,7 +119,7 @@ body
                 span.glyphicon.glyphicon-chevron-down
             div.row.photos-section
               if observation.observation_photos_count == 0
-                p No photos were added to this observation
+                p.hoffset30 No photos were added to this observation
               else  
                 for photo in observation.observation_photos
                   div.col-xs-4.text-center
