@@ -63,34 +63,6 @@ router.get('/signup', function(req, res){
 
 
 router.post('/signup', function(req, res){
-/*  client = new Client();
-    var args = {
-        parameters:{'user[email]': req.body.email,
-                    'user[login]': req.body.username,
-                    'user[password]': req.body.password,
-                    'user[password_confirmation]': req.body.confirmpw},
-        headers:{"Content-Type": "application/json"}
-    }
-
-    client.post('https://inaturalist.org/users.json',args, function(data,response){
-        var parsed = JSON.parse(data);
-        console.log(data[0]);
-        console.log(parsed);
-        console.log(parsed.errors);
-        if (parsed.errors==undefined){
-          res.redirect(gapi.url);
-        }
-        else{
-          console.log("errors oops");
-          console.log(parsed);
-          var locals = {
-                messages: parsed.errors,
-                url: gapi.url,
-                signup: '/signup'
-              };
-          res.render('signup.jade', locals);
-        }
-    });*/
   rest.post('https://inaturalist.org/users.json',{
     data:{'user[email]': req.body.email,
           'user[login]': req.body.username,
@@ -180,15 +152,6 @@ router.get('/observations/:id', function(req, res){
                                     toNew : '/users/newrecord'});
         });
   });
-});
-
-/* example in calling app */
-function requestCallback(err, res, body) {
-    console.log(body);
-}
-
-router.get('/temp', function(req, res) {
-  res.render('layout.jade');
 });
 
 module.exports = router;
