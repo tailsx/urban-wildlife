@@ -58,7 +58,10 @@ body
         a.btn.homecolor(href='/users/main') Back to Home
       div.voffset10
       div.row
-        img.img-rounded.profilepic(src='#{profilepic}')
+        if (profile.medium_user_icon_url == null)
+          img.img-rounded.profilepic(src='/images/defaultUser.png')
+        else
+          img.img-rounded.profilepic(src='#{profile.medium_user_icon_url}')
       h1 #{profile.login}'s Profile
       p With iNaturalist since: #{profile.created_at}
       p Observation count: 

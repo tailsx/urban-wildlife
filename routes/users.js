@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/main', function(req, res) {
-	client = new Client();
+/*	client = new Client();
 
 	var base = 'https://inaturalist.org';
 	var endpoint = '/users/edit';
@@ -23,7 +23,7 @@ router.get('/main', function(req, res) {
 
 	var args = {
         headers:{"Content-Type": "application/json",
-    			"Authorization": 'Bearer ' + global.token}
+    			"Authorization": 'Bearer ' + req.cookies.token}
     }
 
 	// direct way
@@ -54,11 +54,28 @@ router.get('/main', function(req, res) {
 			  						 toRecords : '/users/records/'+ parseduser.login,
 			  						 toNew : '/users/newrecord'});
 		});
-	});
+	});*/
+
+  rest.get('http://www.inaturalist.org/users/edit.json',{
+    headers:{"Content-Type": "application/json"},
+    accessToken: req.cookies.token
+  })
+  .on('complete', function(user,response){
+  	rest.get('http://www.inaturalist.org/observations/project/urban-wildlife.json')
+    	.on('complete', function(map,response){
+      	  res.render('main.jade',{userdata: user,
+    						      mapdata: map,
+                                  toProfile: '/users/profile',
+                                  toMain: '/users/main',
+                                  logout: '/logout',
+                                  toRecords : '/users/records/'+ req.cookies.user,
+                                  toNew : '/users/newrecord'});
+     	});
+  });
 });
 
 router.get('/profile', function(req,res){
-	client = new Client();
+/*	client = new Client();
 
 	var base = 'https://inaturalist.org';
 	var endpoint = '/users/edit';
@@ -87,11 +104,21 @@ router.get('/profile', function(req,res){
 		  						toNew : '/users/newrecord',
 		  						profile: parsed,
 		  						profilepic: picturelink});
-	});
+	});*/
+  rest.get('http://www.inaturalist.org/users/edit.json',{
+    headers:{"Content-Type": "application/json"},
+    accessToken: req.cookies.token
+  })
+  .on('complete', function(user,response){
+  	res.render('profile.jade',{ toMain: '/users/main',
+	                            toRecords : '/users/records/'+ req.cookies.user,
+	                            toNew : '/users/newrecord',
+	                            profile: user});
+  });
 });
 
 router.get('/records/:username', function(req,res){
-	client = new Client();
+/*	client = new Client();
 
 	var base = 'https://inaturalist.org';
 	var endpoint = '/observations';
@@ -105,11 +132,19 @@ router.get('/records/:username', function(req,res){
 			  						info: req.params.username,
 			  						results: parsed,
 			  					    toNew : '/users/newrecord'});
-	});
+	});*/
+  rest.get('https://inaturalist.org/observations/' + req.params.username + '.json')
+  	  .on('complete', function(data,response){
+  	    res.render('records.jade',{ toMain: '/users/main',
+									toProfile: '/users/profile',
+			  						info: req.params.username,
+			  						results: parsed,
+			  					    toNew : '/users/newrecord'});
+  });
 });
 
 router.get('/newrecord', function(req,res){
-	var profile = 'https://inaturalist.org/users/edit.json';
+/*	var profile = 'https://inaturalist.org/users/edit.json';
 	var r = request.get({
 	    url: profile,
 	    headers: { 'Authorization': 'Bearer ' + global.token }
@@ -120,13 +155,17 @@ router.get('/newrecord', function(req,res){
 	      								toProfile: '/users/profile',
 										toNew : '/users/newrecord',
 										toRecords : '/users/records/'+parsed.login});
-	  });
+	  });*/
+  res.render('newrecord.jade',{ toMain: '/users/main',
+  								toProfile: '/users/profile',
+								toNew : '/users/newrecord',
+								toRecords : '/users/records/'+ req.cookies.user});
 });
 
 router.post('/newrecord', multipartMiddleware, function(req,res){
 	if (req.files.file.size == 0){
 		rest.post('https://inaturalist.org/observations.json',{
-			accessToken: global.token,
+			accessToken: req.cookies.token,
 			data: {
 				'observation[species_guess]': req.body.guess,
 				'observation[observed_on_string]': req.body.seen,
@@ -136,12 +175,12 @@ router.post('/newrecord', multipartMiddleware, function(req,res){
 			}
 		}).on('complete', function(data,response){
 			console.log(data);
-			res.redirect('records/' + data[0].user_login);
+			res.redirect('records/' + req.cookies.user);
 		});
 	}
 	else{
 		rest.post('https://inaturalist.org/observations.json',{
-			accessToken: global.token,
+			accessToken: req.cookies.token,
 			multipart: true,
 			data: {
 				'observation[species_guess]': req.body.guess,
@@ -150,20 +189,20 @@ router.post('/newrecord', multipartMiddleware, function(req,res){
 				'observation[place_guess]': req.body.place,
 				'observation[tag_list]': req.body.tag,
 				'local_photos[0]': rest.file(req.files.file.path,
-								  req.files.file.name,
-								  req.files.file.size,
-								  null,
-								  req.files.file.type)
+											 req.files.file.name,
+											 req.files.file.size,
+											 null,
+											 req.files.file.type)
 			}
 		}).on('complete', function(data,response){
 			console.log(data);
-			res.redirect('records/' + data[0].user_login);
+			res.redirect('records/' + req.cookies.user);
 		});
 	}
 });
 
 router.get('/reference', function(req,res){
-	var profile = 'https://inaturalist.org/users/edit.json';
+/*	var profile = 'https://inaturalist.org/users/edit.json';
 	var r = request.get({
 	    url: profile,
 	    headers: { 'Authorization': 'Bearer ' + global.token }
@@ -174,11 +213,15 @@ router.get('/reference', function(req,res){
 	      									   toProfile: '/users/profile',
 										       toNew : '/users/newrecord',
 										       toRecords : '/users/records/'+parsed.login});
-	  });
+	  });*/
+  res.render('displayreference.jade',{ toMain: '/users/main',
+  								       toProfile: '/users/profile',
+								       toNew : '/users/newrecord',
+								       toRecords : '/users/records/'+ req.cookies.user});
 });
 
 router.post('/reference', function(req,res){
-	var profile = 'https://inaturalist.org/users/edit.json';
+/*	var profile = 'https://inaturalist.org/users/edit.json';
 	var r = request.get({
 	    url: profile,
 	    headers: { 'Authorization': 'Bearer ' + global.token }
@@ -197,7 +240,17 @@ router.post('/reference', function(req,res){
 										      toRecords : '/users/records/'+parsed.login,
 										   	  searchResults : data});
 	  		});
-	  });
+	  });*/
+  rest.get('http://data.canadensys.net/vascan/api/0.1/search.json',{
+    query:{'q': req.body.search}
+  })
+  .on('complete', function(results,response){
+  	res.render('reference.jade',{ toMain: '/users/main',
+								  toProfile: '/users/profile',
+							      toNew : '/users/newrecord',
+							      toRecords : '/users/records/'+ req.cookies.user,
+							   	  searchResults : results });
+  });
 });
 
 

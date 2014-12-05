@@ -55,7 +55,10 @@ body
   div.container
     div.jumbotron
       div.row
-        img.img-rounded.iconpic(src='#{profilepic}')
+        if (userdata.user_icon_url == null)
+          img.img-rounded.iconpic(src='/images/defaultUser.png')
+        else
+          img.img-rounded.iconpic(src='#{userdata.user_icon_url}')
         h2.welcome Hello, #{userdata.login}
       div#map-canvas
       div.row.voffset50.text-center
