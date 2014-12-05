@@ -140,7 +140,7 @@ router.post('/testsignup', function(req, res){
 });
 
 router.get('/logout', function(req, res){
-  var r = request.get({
+/*  var r = request.get({
     url: 'https://inaturalist.org/logout',
     headers: { 'Authorization': 'Bearer ' + token }
     }, function(err, res, body){
@@ -150,8 +150,8 @@ router.get('/logout', function(req, res){
   var locals = {
         title: 'This is my TEST app',
         url: gapi.url
-      };
-  token=undefined;
+      };*/
+  global.token=undefined;
   res.redirect('/');
 });
 
@@ -164,7 +164,18 @@ router.get('/projects', function(req, res){
       'longitude': -79.3831840000
     }
   }).on('complete', function(data,response){
-      res.render('projects.jade',{projects: data});
+
+    rest.get('http://www.inaturalist.org//users/edit.json',{
+      headers:{"Content-Type": "application/json"},
+      accessToken: global.token
+    }).on('complete', function(user,response){
+      res.render('projects.jade',{projects: data,
+                                  toProfile: '/users/profile',
+                                  toMain: '/users/main',
+                                  logout: '/logout',
+                                  toRecords : '/users/records/'+ user.login,
+                                  toNew : '/users/newrecord'});
+    });
   });
 });
 
@@ -172,8 +183,18 @@ router.get('/projects/:id', function(req, res){
   // Get projects from around Toronto
   rest.get('http://www.inaturalist.org/observations/project/' + req.params.id + '.json')
       .on('complete', function(data,response){
-        res.render('projectrecords.jade',{results: data});
-  });
+        rest.get('http://www.inaturalist.org//users/edit.json',{
+          headers:{"Content-Type": "application/json"},
+          accessToken: global.token
+        }).on('complete', function(user,response){
+          res.render('projectrecords.jade',{results: data,
+                                            toProfile: '/users/profile',
+                                            toMain: '/users/main',
+                                            logout: '/logout',
+                                            toRecords : '/users/records/'+ user.login,
+                                            toNew : '/users/newrecord'});
+        });
+      });
 });
 
 router.get('/observations/:id', function(req, res){

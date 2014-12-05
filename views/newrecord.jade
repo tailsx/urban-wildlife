@@ -40,9 +40,7 @@ body
               li
                 a(href='/users/reference') Species Names
               li
-                a(href='../temp') Maps
-              li
-                a(href='../temp') Checklist
+                a(href='/projects') Projects
           li
             a(href=toRecords)
               span.glyphicon.glyphicon-list
@@ -61,7 +59,7 @@ body
       div.container
         div.jumbotron
           h1 Enter New Observation
-          p Please enter as much information as you can.  Leaving fields blank will still be ok.
+          p Please enter as much information as you can.  Leaving any field blank will still record the entry.
           div.voffset50
           form(role='form', method='post', enctype='multipart/form-data')
             div.form-group
@@ -83,8 +81,8 @@ body
             div.form-group
               label(for='tag') List of Tags
               input.form-control#tag(type='text', placeholder='Ex. bird, male, grey', name='tag')
-            button.btn.btn-success(type='submit') Submit
-            a.btn.btn-default(href='/users/main') Cancel
+            a.btn.btn-default.pull-right.hoffset10(href='/users/main') Cancel
+            button.btn.btn-success.pull-right(type='submit') Submit
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

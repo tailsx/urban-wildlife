@@ -7,7 +7,7 @@ body{
   background-size: cover;
 }
 
-h1, h2, h3, h6{
+h1, h2, h3, h4, h5, h6{
   font-family: textFontOne;
 }
 
@@ -112,6 +112,24 @@ a {
   color: #4DB870;
 }
 
+.homecolor{
+  /*background-color: #009933;*/
+  background-color: #4DB870;
+  color: white;
+}
+
+.homecolor:link{
+  color: white;
+}
+
+.homecolor:visited{
+  color: white;
+}
+
+.homecolor:hover{
+  background-color: #009933;
+}
+
 .readable{
   font-size: 16px;
 }
@@ -134,7 +152,7 @@ a {
 ul.list-inline > li{
   background-color: white;
   height: 100px;
-  width: 45%;
+  width: 30%;
   margin: 10px;
 }
 
@@ -227,13 +245,16 @@ ul.list-inline > li > .row > a:hover{
  */
 
 .voffset10{margin-top: 10px;}
+.voffset30{margin-top: 30px;}
 .voffset50{margin-top: 50px;}
 
 .no-padding{
   padding: 0px !important;
 }
 
-
+.hoffset10{margin-left: 10px;}
+.hoffset30{margin-left: 30px;}
+.hoffset50{margin-left: 50px;}
 /*
  *  
  *  Profile

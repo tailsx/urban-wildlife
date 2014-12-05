@@ -39,9 +39,7 @@ body
               li
                 a(href='/users/reference') Species Names
               li
-                a(href='../temp') Maps
-              li
-                a(href='../temp') Checklist
+                a(href='/projects') Projects
           li
             a(href='#')
               span.glyphicon.glyphicon-list
@@ -58,7 +56,7 @@ body
   div.container
     div.jumbotron
       div.row
-        a.btn.btn-success(href='/projects') Back to Projects
+        a.btn.homecolor(href='/projects') Back to Projects
       h1 Project observations
       for result in results
         div.row.record
