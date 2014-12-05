@@ -106,7 +106,7 @@ router.get('/projects', function(req, res){
 
     rest.get('http://www.inaturalist.org//users/edit.json',{
       headers:{"Content-Type": "application/json"},
-      accessToken: global.token
+      accessToken: req.cookies.token
     }).on('complete', function(user,response){
       res.render('projects.jade',{projects: data,
                                   toProfile: '/users/profile',
@@ -124,7 +124,7 @@ router.get('/projects/:id', function(req, res){
       .on('complete', function(data,response){
         rest.get('http://www.inaturalist.org//users/edit.json',{
           headers:{"Content-Type": "application/json"},
-          accessToken: global.token
+          accessToken: req.cookies.token
         }).on('complete', function(user,response){
           res.render('projectrecords.jade',{results: data,
                                             toProfile: '/users/profile',
@@ -142,7 +142,7 @@ router.get('/observations/:id', function(req, res){
       .on('complete', function(data,response){
         rest.get('http://www.inaturalist.org//users/edit.json',{
           headers:{"Content-Type": "application/json"},
-          accessToken: global.token
+          accessToken: req.cookies.token
         }).on('complete', function(user,response){
           res.render('single.jade',{observation: data,
                                     toProfile: '/users/profile',
@@ -151,6 +151,18 @@ router.get('/observations/:id', function(req, res){
                                     toRecords : '/users/records/'+ user.login,
                                     toNew : '/users/newrecord'});
         });
+  });
+});
+
+router.get('/addproject/:id', function(req, res){
+  // Get projects from around Toronto
+  rest.post('http://www.inaturalist.org/project_observations.json',{
+    data:{'project_observation[observation_id]': req.params.id,
+          'project_observation[project_id]': 3142},
+    accessToken: req.cookies.token
+  }).on('complete', function(data,response){
+      console.log(data);
+      res.redirect('/projects/3142');
   });
 });
 

@@ -44,7 +44,7 @@ body
           li
             a(href=toRecords)
               span.glyphicon.glyphicon-list
-              |  Records
+              |  My Records
           li
             a(href=toProfile)
               span.glyphicon.glyphicon-user
@@ -112,6 +112,10 @@ body
                     div.col-xs-12
                       a.linktext.text-center(href='/projects/' + project.project.id) #{project.project.title}
 
+          div.row.actions
+              h3.hoffset10 Actions
+                p
+                  a.linktext(href='/addproject/#{observation.id}') Add to Urban wildlife
 
 
           div.row.photos-toggler

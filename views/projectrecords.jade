@@ -23,7 +23,7 @@ body
           span.icon-bar
         div
           img#logo(src='../../images/icon.png')
-          a.navbar-brand(href=toMains) Urban Wildlife
+          a.navbar-brand(href=toMain) Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
           li
@@ -41,9 +41,9 @@ body
               li
                 a(href='/projects') Projects
           li
-            a(href='#')
+            a(href=toRecords)
               span.glyphicon.glyphicon-list
-              |  Records
+              |  My Records
           li
             a(href=toProfile)
               span.glyphicon.glyphicon-user
@@ -56,8 +56,8 @@ body
   div.container
     div.jumbotron
       div.row
-        a.btn.homecolor(href='/projects') Back to Projects
-      h1 Project observations
+        a.btn.homecolor(href='/users/main') Back to Home
+      h1 All project records
       for result in results
         div.row.record
           div.container
@@ -68,34 +68,52 @@ body
                   p.text-center Nearest city: 
                     b #{result.place_guess}
                 else
-                  p Can not display map.  No coordinates given
+                  img.center-block.missingpic(src='/images/defaultmap.png')
               div.col-xs-8.record-info
                 h2 #{result.species_guess}
                 p 
                   b ID Number:
                   |  #{result.id}
                 p 
-                  b Original link: 
-                  a(href='#{result.uri}') iNaturalist link
+                  b Contributor:
+                  |  #{result.user.login}
                 p 
-                  b Identification Count:
-                  |  #{result.identifications_count}
+                  b Description:
+                  if (result.description == "")
+                    |  None
+                  else
+                    i  #{result.description}
                 p 
-                  b Identification Count:
-                  |  #{result.identifications_count}
-            div.row
-              button.btn.btn-default.pull-right(type='button', data-toggle='collapse', data-target='.photos-section') Toggle Pictures
-            div.voffset10
-            div.row.collapse.in.photos-section
+                  b Observed on:
+                  if (result.observed_on == null)
+                    |  Unknown
+                  else
+                    |  #{result.observed_on}
+                p 
+                  a(href='/observations/#{result.id}') Click Here
+                  |  for more information
+
+            div.row.photos-toggler
+              h3.pull-right Show #{result.observation_photos_count} Photo(s) 
+                span.glyphicon.glyphicon-chevron-down
+            div.row.photos-section
               if result.photos.length == 0
-                p No were added to this observation
+                p No photos were added to this observation
               else  
                 for photo in result.photos
                   div.col-xs-4.text-center
-                    a.linktext(href=photo.medium_url)
+                    a(href=photo.medium_url)
                       img(src=photo.small_url)
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
   script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $('.photos-section').hide();
+      $('.photos-toggler').click(function()
+      {
+        $(this).next('.photos-section').slideToggle(600);
+      });
+    });

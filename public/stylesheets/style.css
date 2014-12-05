@@ -238,6 +238,22 @@ ul.list-inline > li > .row > a:hover{
   color: #CCEBD6;
 }
 
+.record:nth-of-type(odd) > .container > .row > h3 > p > a:link{
+  color: #4DB870;
+}
+
+.record:nth-of-type(odd) > .container > .row > h3 > p > a:visited{
+  color: #4DB870;
+}
+
+.record:nth-of-type(even) > .container > .row > h3 > p > a:link{
+  color: #CCEBD6;
+}
+
+.record:nth-of-type(even) > .container > .row > h3 > p > a:visited{
+  color: #CCEBD6;
+}
+
 /*
  *  
  *  Spacing

@@ -43,7 +43,7 @@ body
           li
             a(href='#')
               span.glyphicon.glyphicon-list
-              |  Records
+              |  My Records
           li
             a(href=toProfile)
               span.glyphicon.glyphicon-user
@@ -89,6 +89,11 @@ body
                 p 
                   a(href='/observations/#{result.id}') Click Here
                   |  for more information
+
+            div.row.actions
+              h3.hoffset10 Actions
+                p
+                  a.linktext(href='/addproject/#{result.id}') Add to Urban wildlife
 
             div.row.photos-toggler
               h3.pull-right Show #{result.observation_photos_count} Photo(s) 
