@@ -99,13 +99,24 @@ body
               h3.pull-right Show #{result.observation_photos_count} Photo(s) 
                 span.glyphicon.glyphicon-chevron-down
             div.row.photos-section
-              if result.photos.length == 0
-                p No photos were added to this observation
-              else  
-                for photo in result.photos
-                  div.col-xs-4.text-center
-                    a(href=photo.medium_url)
-                      img(src=photo.small_url)
+              div.row
+                if result.photos.length == 0
+                  p No photos were added to this observation
+                else  
+                  for photo in result.photos
+                    div.col-xs-4.text-center
+                      a(href=photo.medium_url)
+                        img(src=photo.small_url)
+              div.row-fluid
+                form(role='form', method='post', enctype='multipart/form-data')
+                  div.form-group
+                    label(for='image') Add a new photo?
+                    input.form-control#image(type='file', accept='image/*', name='file')
+                  div.form-group.hidden
+                    label(for='id') Species Guess
+                    div#canadensys
+                      input.form-control#id(type='number', value='#{result.id}', name='id')
+                  button.btn.btn-success.pull-right(type='submit') Add photo!
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

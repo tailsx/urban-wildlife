@@ -57,6 +57,33 @@ router.get('/records/:username', function(req,res){
   });
 });
 
+router.post('/records/:username', multipartMiddleware, function(req,res){
+/*  rest.post('https://inaturalist.org/observations/' + req.params.username + '.json')
+  	  .on('complete', function(data,response){
+  	    res.render('records.jade',{ toMain: '/users/main',
+									toProfile: '/users/profile',
+			  						info: req.params.username,
+			  						results: data,
+			  					    toNew : '/users/newrecord'});
+  });*/
+  rest.post('https://inaturalist.org/observation_photos/',{
+		multipart: true,
+		accessToken: req.cookies.token,
+		data: {
+			'observation_photo[observation_id]': req.body.id,
+			'file': rest.file(req.files.file.path,
+							  req.files.file.name,
+							  req.files.file.size,
+							  null,
+							  req.files.file.type)
+		}
+	}).on('complete', function(data,response){
+		console.log(data);
+		console.log(response);
+		res.redirect('/users/records/' + req.params.username);
+	});
+});
+
 router.get('/newrecord', function(req,res){
   res.render('newrecord.jade',{ toMain: '/users/main',
   								toProfile: '/users/profile',

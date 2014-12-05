@@ -58,7 +58,7 @@ body
     div.jumbotron
       div.row
         a.btn.homecolor(href='/users/main') Back to Home
-      h1 Verbose data for #{observation.species_guess}
+      h1 Full details for #{observation.species_guess}
       div.row.record
         div.container
           div.row
@@ -111,12 +111,6 @@ body
                         img.img-rounded.profilepic(src='#{project.project.icon_url}')
                     div.col-xs-12
                       a.linktext.text-center(href='/projects/' + project.project.id) #{project.project.title}
-
-          div.row.actions
-              h3.hoffset10 Actions
-                p
-                  a.linktext(href='/addproject/#{observation.id}') Add to Urban wildlife
-
 
           div.row.photos-toggler
               h3.pull-right Show #{observation.observation_photos_count} Photo(s) 
