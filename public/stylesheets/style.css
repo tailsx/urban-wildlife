@@ -239,7 +239,7 @@ ul.list-inline > li > .row > a:hover{
  *  Profile
  *  
  */
-.iconpic {
+.profilepic {
   margin-left: 19px;
   float:left;
   max-width: 300px;
@@ -272,3 +272,8 @@ ul.list-inline > li > .row > a:hover{
   margin-bottom: 5px !important;
 }
 
+.missingpic {
+  float:left;
+  height: 100%;
+  width: 100%;
+}

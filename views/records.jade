@@ -23,7 +23,7 @@ body
           span.icon-bar
         div
           img#logo(src='../../images/icon.png')
-          a.navbar-brand(href=toMains) Urban Wildlife
+          a.navbar-brand(href=toMain) Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
           li
@@ -70,7 +70,7 @@ body
                   p.text-center Nearest city: 
                     b #{result.place_guess}
                 else
-                  p Can not display map.  No coordinates given
+                  img.center-block.missingpic(src='/images/defaultmap.png')
               div.col-xs-8.record-info
                 h2 #{result.species_guess}
                 p 
@@ -85,10 +85,9 @@ body
                 p 
                   b Identification Count:
                   |  #{result.identifications_count}
-            div.row
-              button.btn.btn-default.pull-right(type='button', data-toggle='collapse', data-target='.photos-section') Toggle Pictures
-            div.voffset10
-            div.row.collapse.in.photos-section
+            div.toggler-36
+              h3 Toggle pleases
+            div.row.photos-section
               if result.photos.length == 0
                 p No were added to this observation
               else  
@@ -101,3 +100,13 @@ body
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
   script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $('.photos-section').hide();
+      $('.toggler-36').click(function()
+      {
+        $(this).next('.photos-section').slideToggle(600);
+      });
+    });
+
+
