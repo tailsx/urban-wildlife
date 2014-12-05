@@ -6,10 +6,11 @@ html(lang='en')
     meta(name='description', content='Urban Wildlife web app using iNaturalist database')
     meta(name='author', content='Zhi Hao (David) Chen')
     title Urban Wildlife App
-    link(href='http://fonts.googleapis.com/css?family=Montserrat:700,400', rel='stylesheet',type='text/css')
     link(href='/lib/bootstrap-3.2.0-dist/css/bootstrap.min.css', rel='stylesheet')
     link(href='/stylesheets/style.css', rel='stylesheet')
-    link(rel='icon', href='../../images/icon.png')
+    link(href='/stylesheets/test.css', rel='stylesheet')
+    link(href='/stylesheets/typeaheadjs.css', rel='stylesheet')
+    link(rel='icon', href='../images/icon.png')
 
 
 body
@@ -22,7 +23,7 @@ body
           span.icon-bar
           span.icon-bar
         div
-          img#logo(src='../../images/icon.png')
+          img#logo(src='../images/icon.png')
           a.navbar-brand(href=toMain) Urban Wildlife
       div.navbar-collapse.collapse
         ul.nav.navbar-nav.navbar-right
@@ -43,7 +44,7 @@ body
               li
                 a(href='../temp') Checklist
           li
-            a(href='#')
+            a(href=toRecords)
               span.glyphicon.glyphicon-list
               |  Records
           li
@@ -51,7 +52,7 @@ body
               span.glyphicon.glyphicon-user
               |  Profile
           li
-            a(href='../../')
+            a(href='../')
               span.glyphicon.glyphicon-log-out
               |  Logout
 
@@ -59,58 +60,84 @@ body
     div.jumbotron
       div.row
         a.btn.btn-success(href='/users/main') Back to Profile
-      h1 Personal records
-      for result in results
-        div.row.record
-          div.container
-            div.row
-              div.col-xs-4
-                if result.latitude != null && result.longitude != null
-                  img.center-block(src='https://maps.googleapis.com/maps/api/staticmap?center=#{result.latitude},#{result.longitude}&zoom=#{result.map_scale}&size=300x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{result.latitude},#{result.longitude}')
+      h1 Verbose data for #{observation.species_guess}
+      div.row.record
+        div.container
+          div.row
+            div.col-xs-4
+                if observation.latitude != null && observation.longitude != null
+                  img.center-block(src='https://maps.googleapis.com/maps/api/staticmap?center=#{observation.latitude},#{observation.longitude}&zoom=#{observation.map_scale}&size=300x300&maptype=roadmap&markers=color:green%7Clabel:A%7C#{observation.latitude},#{observation.longitude}')
                   p.text-center Nearest city: 
-                    b #{result.place_guess}
+                    b #{observation.place_guess}
                 else
-                  img.center-block.missingpic(src='/images/defaultmap.png')
-              div.col-xs-8.record-info
-                h2 #{result.species_guess}
+                  p Can not display map.  No coordinates given
+            div.col-xs-8.record-info
+                h2 #{observation.species_guess}
                 p 
                   b ID Number:
-                  |  #{result.id}
+                  |  #{observation.id}
+                p 
+                  b Recorder:
+                  |  #{observation.user_login}
                 p 
                   b Description:
-                  if (result.description == "")
+                  if (observation.description == "")
                     |  None
                   else
-                    i  #{result.description}
+                    i  #{observation.description}
                 p 
                   b Identification Count:
-                  |  #{result.identifications_count}
+                  |  #{observation.identifications_count}
                 p 
                   b Observed on:
-                  if (result.observed_on == null)
+                  if (observation.observed_on == null)
                     |  Unknown
                   else
-                    |  #{result.observed_on}
+                    |  #{observation.observed_on}
                 p 
                   b Original link: 
-                  a(href='#{result.uri}') iNaturalist link
+                  a(href='#{observation.uri}') iNaturalist link
 
-            div.row.photos-toggler
-              h3.pull-right Show #{result.observation_photos_count} Photo(s) 
+          div.row.projects
+            p Projects
+            if (observation.project_observations.length == 0)
+              p Not added into any project
+            else
+              for project in observation.project_observations
+                div.col-xs-6.col-sm-3
+                  div.row
+                    div.col-xs-12
+                      if (project.project.icon_url == null)
+                        img.img-rounded.profilepic(src='/images/defaultprojects.png')
+                      else
+                        img.img-rounded.profilepic(src='#{project.project.icon_url}')
+                    div.col-xs-12
+                      a.linktext.text-center(href='/projects/' + project.project.id) #{project.project.title}
+
+
+
+          div.row.photos-toggler
+              h3.pull-right Show #{observation.observation_photos_count} Photo(s) 
                 span.glyphicon.glyphicon-chevron-down
             div.row.photos-section
-              if result.photos.length == 0
+              if observation.observation_photos_count == 0
                 p No photos were added to this observation
               else  
-                for photo in result.photos
+                for photo in observation.observation_photos
                   div.col-xs-4.text-center
-                    a(href=photo.medium_url)
-                      img(src=photo.small_url)
+                    a(href=photo.photo.medium_url)
+                      img(src=photo.photo.small_url)
+                    ul.list-unstyled
+                      li
+                        a.linktext(href=photo.photo.small_url) View Small
+                      li
+                        a.linktext(href=photo.photo.medium_url) View Medium
+                      li
+                        a.linktext(href=photo.photo.large_url) View Large
 
 
   script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
   script(src='/lib/bootstrap-3.2.0-dist/js/bootstrap.min.js')
-  script(src='https://maps.googleapis.com/maps/api/js?v=3.exp')
   script(type='text/javascript').
     $(document).ready(function(){
       $('.photos-section').hide();
@@ -119,5 +146,3 @@ body
         $(this).next('.photos-section').slideToggle(600);
       });
     });
-
-

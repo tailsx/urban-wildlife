@@ -176,6 +176,15 @@ router.get('/projects/:id', function(req, res){
   });
 });
 
+router.get('/observations/:id', function(req, res){
+  // Get projects from around Toronto
+  rest.get('http://www.inaturalist.org/observations/' + req.params.id + '.json')
+      .on('complete', function(data,response){
+        //res.render('projectrecords.jade',{results: data});
+        res.render('single.jade',{observation: data});
+  });
+});
+
 /* example in calling app */
 function requestCallback(err, res, body) {
     console.log(body);
